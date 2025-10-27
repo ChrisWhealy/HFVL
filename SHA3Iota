@@ -1,19 +1,19 @@
 # visualization for xor in sponge function
 # input: chi, rc
-
 Frame 1:
     $modifyTitle(text='Iota Function Visualization', color='red')
-    $db(chiby,55,720,860,90,text='Chi bytes')
+    $db(chiby,55,720,1020,90,text='Chi bytes')
+    $db(description,930,550,240,140,text='Description of events')
+
     $db(rchiby,500,280,400,180,text='Rest of Chi bytes')
-    $drawBox(i1by,70,620,200,50,text='Chi[0][0] bytes')
-    $drawBox(i1bi,55,520,230,50,text='Chi[0][0] bits')
-    $drawBox(i2by,540,620,200,50,text='Round constant bytes')
-    $drawBox(i2bi,525,520,230,50,text='Round constant bits')
-    $drawBox(xor,380,520,50,50,text='XOR')
-    $drawBox(obi,220,410,230,50,text='XOR output bit')
-    $drawBox(oby,235,310,200,50,text='XOR output byte')
-    $drawBox(oba,80,50,860,90,text='Iota output')
-    $db(description,930,670,240,140,text='Description of events')
+    $drawBox(i1by,55,620,200,50,text='Chi[0][0] bytes')
+    $drawBox(i1bi,55,500,200,70,text='Chi[0][0] bits')
+    $drawBox(i2by,370,620,200,50,text='Round constant bytes')
+    $drawBox(i2bi,370,500,200,70,text='Round constant bits')
+    $drawBox(xor,290,510,50,50,text='XOR')
+    $drawBox(obi,200,410,230,70,text='XOR output bit')
+    $drawBox(oby,215,310,200,50,text='XOR output byte')
+    $drawBox(oba,80,80,1020,90,text='Iota output')
 
     $drawArrow(chiby,i1by)
     $drawArrow(i1by,i1bi)

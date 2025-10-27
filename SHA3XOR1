@@ -3,13 +3,16 @@
 
 Frame 1:
     $modifyTitle(text='XOR of Input Bytes and Rate Visualization', color='red')
-    $drawBox(i1by,50,700,300,100,text='Rate bytes')
-    $drawBox(i1bi,50,470,380,180,text='Rate bits')
-    $drawBox(i2by,50,90,300,100,text='Input bytes')
-    $drawBox(i2bi,50,240,380,180,text='Input bits')
-    $drawBox(xor,540,420,50,50,text='XOR')
-    $drawBox(obi,740,355,380,180,text='output bit')
-    $drawBox(oby,780,180,300,100,text='output byte')
+    $drawBox(i1by,  50, 725, 200, 130, text='Rate bytes')
+    $drawBox(i1bi, 450, 680, 300, 220, text='Rate bits')
+
+    $drawBox(i2by,  50, 450, 200, 130, text='Input bytes')
+    $drawBox(i2bi, 450, 405, 300, 220, text='Input bits')
+
+    $drawBox(xor, 910, 620, 50, 50, text='XOR')
+
+    $drawBox(obi, 1040, 535, 300, 220,text='Output bits')
+    $drawBox(oby, 1090, 350, 200, 130,text='Output bytes')
 
     $drawArrow(i1by,i1bi)
     $drawArrow(i2by,i2bi)

@@ -2,24 +2,28 @@
 # created by Andrew Chabot
 # RIT Master's Project 2021
 
-BIT_BYTE = {'0000': '0', '0001': '1', '0010': '2', '0011': '3', '0100': '4', '0101': '5', '0110': '6', '0111': '7',
-            '1000': '8', '1001': '9', '1010': 'a', '1011': 'b', '1100': 'c', '1101': 'd', '1110': 'e', '1111': 'f'}
+BIT_BYTE = {
+    '0000': '0', '0001': '1', '0010': '2', '0011': '3', '0100': '4', '0101': '5', '0110': '6', '0111': '7',
+    '1000': '8', '1001': '9', '1010': 'a', '1011': 'b', '1100': 'c', '1101': 'd', '1110': 'e', '1111': 'f'}
 
-BYTE_BIT = {'0': '0000', '1': '0001', '2': '0010', '3': '0011', '4': '0100', '5': '0101', '6': '0110', '7': '0111',
-            '8': '1000', '9': '1001', 'a': '1010', 'b': '1011', 'c': '1100', 'd': '1101', 'e': '1110', 'f': '1111'}
+BYTE_BIT = {
+    '0': '0000', '1': '0001', '2': '0010', '3': '0011', '4': '0100', '5': '0101', '6': '0110', '7': '0111',
+    '8': '1000', '9': '1001', 'a': '1010', 'b': '1011', 'c': '1100', 'd': '1101', 'e': '1110', 'f': '1111'}
 
-ROT_TABLE = [[ 0, 36,  3, 41, 18],
-             [ 1, 10, 44, 45,  2],
-             [62,  6, 43, 15, 61],
-             [28, 55, 25, 21, 56],
-             [27, 20, 39,  8, 14]]
+ROT_TABLE = [
+    [ 0, 36,  3, 41, 18],
+    [ 1, 10, 44, 45,  2],
+    [62,  6, 43, 15, 61],
+    [28, 55, 25, 21, 56],
+    [27, 20, 39,  8, 14]]
 
-K_RCs = ['00 00 00 00 00 00 00 01', '00 00 00 00 00 00 80 82', '80 00 00 00 00 00 80 8a', '80 00 00 00 80 00 80 00',
-         '00 00 00 00 00 00 80 8b', '00 00 00 00 80 00 00 01', '80 00 00 00 80 00 80 81', '80 00 00 00 00 00 80 09',
-         '00 00 00 00 00 00 00 8a', '00 00 00 00 00 00 00 88', '00 00 00 00 80 00 80 09', '00 00 00 00 80 00 00 0a',
-         '00 00 00 00 80 00 80 8b', '80 00 00 00 00 00 00 8b', '80 00 00 00 00 00 80 89', '80 00 00 00 00 00 80 03',
-         '80 00 00 00 00 00 80 02', '80 00 00 00 00 00 00 80', '00 00 00 00 00 00 80 0a', '80 00 00 00 80 00 00 0a',
-         '80 00 00 00 80 00 80 81', '80 00 00 00 00 00 80 80', '00 00 00 00 80 00 00 01', '80 00 00 00 80 00 80 08']
+K_RCs = [
+  '00 00 00 00 00 00 00 01', '00 00 00 00 00 00 80 82', '80 00 00 00 00 00 80 8a', '80 00 00 00 80 00 80 00',
+  '00 00 00 00 00 00 80 8b', '00 00 00 00 80 00 00 01', '80 00 00 00 80 00 80 81', '80 00 00 00 00 00 80 09',
+  '00 00 00 00 00 00 00 8a', '00 00 00 00 00 00 00 88', '00 00 00 00 80 00 80 09', '00 00 00 00 80 00 00 0a',
+  '00 00 00 00 80 00 80 8b', '80 00 00 00 00 00 00 8b', '80 00 00 00 00 00 80 89', '80 00 00 00 00 00 80 03',
+  '80 00 00 00 00 00 80 02', '80 00 00 00 00 00 00 80', '00 00 00 00 00 00 80 0a', '80 00 00 00 80 00 00 0a',
+  '80 00 00 00 80 00 80 81', '80 00 00 00 00 00 80 80', '00 00 00 00 80 00 00 01', '80 00 00 00 80 00 80 08']
 
 
 def apply_function(func_name, in_args):
@@ -216,8 +220,21 @@ def apply_function(func_name, in_args):
             return d_func(func_args[0])
         else:
             print('wrong number of args for D function, expected 1 got ' + str(len(func_args)))
+    elif func_name == 'groupAsI64':
+        if len(func_args) == 1:
+            return group_hex_bytes(func_args[0])
+        else:
+            print('wrong number of args for group_hex_bytes function, expected 1 got ' + str(len(func_args)))
     return func_name
 
+def group_hex_bytes(hex_string):
+    grouped = []
+    bytes_list = hex_string.strip().split()
+    for i, byte in enumerate(bytes_list, start=1):
+        grouped.append(byte)
+        if i % 8 == 0:
+            grouped.append('')  # Adds an extra space
+    return ' '.join(grouped).strip()
 
 def lbit_shift(in_bit, shift_len):
     in_bit = in_bit.replace(' ', '')
@@ -581,13 +598,18 @@ def pi(rho_o):
     return bit_to_byte(un_matrix(pi_o))
 
 
-def chi(pi_o):
-    pi_o = byte_to_bit(pi_o)
-    pi_old = create_mat(pi_o)
-    chi_out = pi_old.copy()
+def chi(pi_in):
+    pi_bits = byte_to_bit(pi_in)
+    pi_matrix = create_mat(pi_bits)
+    chi_out = pi_matrix.copy()
+
     for x in range(0, 5):
         for y in range(0, 5):
-            chi_out[x][y] = xor_bit(pi_old[x][y], and_bit(not_bit(pi_old[(x+1) % 5][y]), pi_old[(x+2) % 5][y]))
+            w0 = pi_matrix[x][y]
+            w1 = pi_matrix[(x+1) % 5][y]
+            w2 = pi_matrix[(x+2) % 5][y]
+            chi_out[x][y] = xor_bit(w0, and_bit(not_bit(w1), w2))
+
     return bit_to_byte(un_matrix(chi_out))
 
 

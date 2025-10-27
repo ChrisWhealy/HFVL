@@ -330,7 +330,7 @@ def solve_text(box_text, box_dict, prev_window_dict, var_dict):
         return box_text
     no_slice = ['@bitbyte', '@bytebit', '@not', '@mod32', '@lbitshift5', '@lbitshift30', '@rbitshift2', '@rbitshift13',
                 '@rbitshift22', '@rbitshift6', '@rbitshift11', '@rbitshift25', '@trunc32', '@theta', '@rho', '@chi',
-                '@pi', '@last128', '@first272', '@last384', '@dfunc', '@cfunc']
+                '@pi', '@last128', '@first272', '@last384', '@dfunc', '@cfunc', '@groupAsI64']
     if box_text[0] == '@':
         # function found
         func_name, func_args = box_text.split('(', 1)
@@ -363,6 +363,7 @@ def solve_text(box_text, box_dict, prev_window_dict, var_dict):
         func_result = bitFunctions.apply_function(func_name.replace('@', ''), real_func_args)
         if isinstance(func_result, str):
             box_text = func_result
+            # print(box_text)
         else:
             return func_result
     elif box_text[0] == '*':

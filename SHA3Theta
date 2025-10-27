@@ -2,7 +2,7 @@
 # input: a
 Frame 1:
     $modifyTitle(text='Theta Function Visualization', color='red')
-    $db(a1,55,720,860,90,text='A bytes')
+    $db(a1,55,720,1015,90,text='A bytes')
     $db(c,55,550,180,120,text='C function')
     $db(d,55,390,180,120,text='D function')
     $db(a2,235,390,680,120,text='A bytes')
@@ -112,4 +112,3 @@ Frame 18:
     $ra(xorLoop,oby)
     $mb(oby,color=red)
 Frame End
-

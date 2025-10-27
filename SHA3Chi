@@ -5,35 +5,45 @@ _xNum = 0
 _yNum = 0
 Frame 1:
     $modifyTitle(text='Chi Function Visualization Round 0', color='red')
-    $db(b,55,720,860,90,text='B bytes')
-    $drawBox(i1by,105,620,200,30,text='B[x][y] bytes')
-    $drawBox(i1bi,90,550,230,50,text='B[x][y] bits')
-    $drawBox(i2by,385,620,200,30,text='B[x+1][y] bytes')
-    $drawBox(i2bi,370,550,230,50,text='B[x+1][y] bits')
-    $drawBox(i3by,665,620,200,30,text='B[x+2][y] bytes')
-    $drawBox(i3bi,650,550,230,50,text='B[x+2][y] bits')
-    $drawBox(not,460,490,50,40,text='NOT')
-    $db(ni2,370,420,230,50,text='NOT B[x+1][y]')
-    $db(and,740,420,50,50,text='AND')
-    $db(ni2ai3,650,340,230,50,text='NOT B[x+1][y] AND B[x+2][y]')'
-    $db(xor,495,340,50,50,text='XOR')
-    $drawBox(obi,405,260,230,50,text='XOR output bit')
-    $drawBox(oby,420,180,200,50,text='XOR output byte')
-    $drawBox(oba,90,50,860,90,text='Chi output')
-    $db(description,930,670,240,140,text='Description of events')
+    $drawBox(b,             55, 860, 1055,  90, text='B bytes')
+    $drawBox(description, 1110, 810,  350, 140, text='Description of events')
+    $drawBox(xval,        1110, 750,  100,  30, text='X value')
+    $drawBox(yval,        1250, 750,  100,  30, text='Y value')
 
-    $drawArrow(b,i2by)
-    $drawArrow(b,i3by)
+    $drawBox(i1by, 105, 750, 200, 40, text='w0 bytes: B[x][y]')
+    $drawBox(i2by, 340, 700, 200, 40, text='w1 bytes: B[x+1][y]')
+    $drawBox(i3by, 685, 700, 200, 40, text='w2 bytes: B[x+2][y]')
+
+    $drawBox(i1bi,  45, 360, 320, 50, text='w0 bits')
+    $drawBox(i2bi, 280, 600, 320, 50, text='w1 bits')
+    $drawBox(i3bi, 625, 600, 320, 50, text='w2 bits')
+
+    $drawBox(not, 415, 520, 50, 40, text='NOT')
+
+    $db(ni2,    280, 440, 320, 50, text='NOT w1')
+    $db(and,    760, 440, 50,  50, text='AND')
+    $db(ni2ai3, 625, 360, 320, 50, text='NOT w1 AND w2')
+    $db(xor,    495, 360, 50,  50, text='XOR')
+
+    $drawBox(obi, 360, 280,  320, 50, text='XOR output bits')
+    $drawBox(oby, 420, 200,  200, 50, text='XOR output bytes')
+    $drawBox(oba, 90,   70, 1055, 90, text='Chi output')
+
     $drawArrow(b,i1by)
+    $drawArrow(b,i3by)
+    $drawArrow(b,i2by)
+
     $drawArrow(i1by,i1bi)
     $drawArrow(i2by,i2bi)
     $drawArrow(i3by,i3bi)
     $drawArrow(i1bi,xor)
+
     $da(i2bi,not)
     $da(not,ni2)
     $da(ni2,and)
     $da(i3bi,and)
     $da(and,ni2ai3)
+
     $drawArrow(ni2ai3,xor)
     $drawArrow(xor,obi)
     $drawArrow(obi,oby)
@@ -43,7 +53,7 @@ Frame End
 Frame 2:
     $mb(b,color=blue,bold=true,text=*pi)
     $mb(oba,text=' ')
-    $mb(description,color=blue,text='Populate the input block with the output of the previous pi function. This input is a matrix of 25 values set up in a 5x5 matrix.')
+    $mb(description,color=blue,text='Populate the input block with the output of the previous pi function.\\This input is a matrix of 25 values set up in a 5x5 matrix.')
 Frame End
 
 Frame 3:
@@ -53,13 +63,16 @@ Frame End
 while @lt(_roundNum;25):
     Round
     Frame 4:
-        $mb(description,color=blue,text='Populate current byte values based on the current x and y indices. The x+1 and x+2 values are taken as values modulus 5. We then translate these bytes to their corresponding bit values.')
+        $mb(description,color=blue,text='Populate current byte values based on the current x and y indices.\\The x+1 and x+2 values are taken as values modulus 5.\\We then translate these bytes to their corresponding bit values.')
         $mb(b,color=blue,bold=true)
+        $mb(xval, text=@concat('X: ';_xNum))
+        $mb(yval, text=@concat('Y: ';_yNum))
         $ma(b,i2by,color=blue)
         $ma(b,i1by,color=blue)
         $ma(b,i3by,color=blue)
     Frame End
 
+    # Pick up w0, w1 and w2
     Frame 5:
         if @lt(_xNum;3):
             $mb(i2by,color=blue,bold=true,text=@indexmat(*pi;@+(_xNum;1);_yNum))
@@ -81,7 +94,7 @@ while @lt(_roundNum;25):
         $ra(b,i3by)
     Frame End
 
-    Frame 6:
+    Frame 7:
         $mb(description,color=blue,text='Populate the input block with the output of the previous pi function')
         $ma(i1by,i1bi,color='blue')
         $ma(i2by,i2bi,color='blue')
@@ -91,13 +104,13 @@ while @lt(_roundNum;25):
         $mb(i1bi,color=blue,bold=true)
     Frame End
 
-    Frame 7:
+    Frame 8:
         $mb(i1bi,text=@bytebit(*i1by))
         $mb(i2bi,text=@bytebit(*i2by))
         $mb(i3bi,text=@bytebit(*i3by))
     Frame End
 
-    Frame 8:
+    Frame 9:
         $rb(i1bi)
         $rb(i2bi)
         $rb(i3bi)
@@ -110,22 +123,22 @@ while @lt(_roundNum;25):
         $rb(description)
     Frame End
 
-    Frame 9:
+    Frame 10:
         $mb(description,color=blue,text='Take the not of the B[x+1][y] and save this value.')
         $mb(i2bi,color=green,bold=true)
         $ma(i2bi,not,color=green)
     Frame End
 
-    Frame 10:
+    Frame 11:
         $mb(not,color=red,bold=true)
         $ma(not,ni2,color=red)
     Frame End
 
-    Frame 11:
+    Frame 12:
         $mb(ni2,color=red,bold=true,text=@not(*i2bi))
     Frame End
 
-    Frame 12:
+    Frame 13:
         $rb(ni2)
         $rb(i2bi)
         $rb(not)
@@ -134,24 +147,24 @@ while @lt(_roundNum;25):
         $rb(description)
     Frame End
 
-    Frame 13:
-        $mb(description,color=blue,text='And together the not of B[x+1][y] and B[x+2][y] and store this value.')
+    Frame 14:
+        $mb(description,color=blue,text='NOT(B[x+1][y]) AND B[x+2][y]')
         $mb(ni2,color=green,bold=true)
         $mb(i3bi,color=green,bold=true)
         $ma(ni2,and,color=green)
         $ma(i3bi,and,color=green)
     Frame End
 
-    Frame 14:
+    Frame 15:
         $mb(and,color=red,bold=true)
         $ma(and,ni2ai3,color=red)
     Frame End
 
-    Frame 15:
+    Frame 16:
         $mb(ni2ai3,color=red,bold=true,text=@and(*ni2;*i3bi))
     Frame End
 
-    Frame 16:
+    Frame 17:
         $rb(ni2ai3)
         $rb(and)
         $rb(i3bi)
@@ -162,7 +175,7 @@ while @lt(_roundNum;25):
         $rb(description)
     Frame End
 
-    Frame 17:
+    Frame 18:
         $mb(description,color=blue,text='XOR together the result of the previous AND and the B[x][y] value. This will become our output for this round.')
         $mb(ni2ai3,color=green,bold=true)
         $mb(i1bi,color=green,bold=true)
@@ -170,16 +183,16 @@ while @lt(_roundNum;25):
         $ma(ni2ai3,xor,color=green)
     Frame End
 
-    Frame 18:
+    Frame 19:
         $mb(xor,color=red,bold=true)
         $ma(xor,obi,color=red)
     Frame End
 
-    Frame 19:
+    Frame 20:
         $mb(obi,color=red,bold=True,text=@xor(*i1bi;*ni2ai3))
     Frame End
 
-    Frame 20:
+    Frame 21:
         $rb(obi)
         $rb(xor)
         $rb(i1bi)
@@ -190,33 +203,33 @@ while @lt(_roundNum;25):
         $rb(description)
     Frame End
 
-    Frame 21:
+    Frame 22:
         $mb(description,color=blue,text='Take the output of the XOR and translate it from bits back into bytes.')
         $mb(obi,color=blue,bold=true)
         $ma(obi,oby,color=blue)
     Frame End
 
-    Frame 22:
+    Frame 23:
         $mb(oby,color=blue,bold=true,text=@bitbyte(*obi))
     Frame End
 
-    Frame 23:
+    Frame 24:
         $rb(obi)
         $ra(obi,oby)
         $rb(description)
     Frame End
 
-    Frame 24:
+    Frame 25:
         $mb(description,color=blue,text='Append the current byte block to the output of our Chi function')
         $ma(oby,oba,color=blue)
         if @lt(_roundNum;1):
             $mb(oba,color=blue,bold=true,text=*oby)
         else:
-            $mb(oba,color=blue,bold=true,text=@concat(@concat(*oba;' ');*oby))
+            $mb(oba,color=blue,bold=true,text=@concat(@concat(*oba;'  ');*oby))
         if end
     Frame End
 
-    Frame 25:
+    Frame 26:
         $rb(oba)
         $rb(oby)
         $ra(oby,oba)
@@ -224,7 +237,7 @@ while @lt(_roundNum;25):
     Frame End
 
     _roundNum = @+(_roundNum;1)
-    Frame 26:
+    Frame 27:
         _yNum = @+(_yNum;1)
         if @lt(_yNum;5):
             _xNum = _xNum
@@ -233,22 +246,22 @@ while @lt(_roundNum;25):
             _xNum = @+(_xNum;1)
         if end
         $modifyTitle(text=@concat('Chi Function Visualization Round ';_roundNum), color='red')
-        $mb(i1by,text='B[x][y] bytes')
-        $mb(i1bi,text='B[x][y] bits')
-        $mb(i2by,text='B[x+1][y] bytes')
-        $mb(i2bi,text='B[x+1][y] bits')
-        $mb(i3by,text='B[x+2][y] bytes')
-        $mb(i3bi,text='B[x+2][y] bits')
-        $mb(ni2,text='NOT B[x+1][y]')
-        $mb(ni2ai3,text='NOT B[x+1][y] AND B[x+2][y]')'
-        $mb(obi,text='XOR output bit')
-        $mb(oby,text='XOR output byte')
-        $mb(description,color=blue,text='End of current Chi round. We will increase the y value if it is not currently 4. If the y value is 4 we will increase the x value by 1 and set the y value back to 0. We then run the process again with these new values.')
+        $mb(i1by,text='w0 bytes: B[x][y]')
+        $mb(i1bi,text='w0 bits')
+        $mb(i2by,text='w1 bytes: B[x+1][y]')
+        $mb(i2bi,text='w1 bits')
+        $mb(i3by,text='w2 bytes: B[x+2][y]')
+        $mb(i3bi,text='w2 bits')
+        $mb(ni2,text='NOT w1')
+        $mb(ni2ai3,text='NOT w1 AND w2')'
+        $mb(obi,text='XOR output bits')
+        $mb(oby,text='XOR output bytes')
+        $mb(description,color=blue,text='End of current Chi round.\\If y < 4 increment y else set y to zero and increment x.\\Repeat the Chi function with these new x and y values.')
     Frame End
 While End
 
 Round
-Frame 27:
+Frame 28:
     $mb(oba,color=red,bold=True)
-    $mb(description,color=red,text='End of the Chi function. The output is shown in the lower block. This will be used as input to the Iota function.')
+    $mb(description,color=red,text='End of the Chi function.\\The output is shown in the lower block.\\This becomes the input to the Iota function.')
 Frame End
