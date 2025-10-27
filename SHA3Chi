@@ -10,24 +10,25 @@ Frame 1:
     $drawBox(xval,        1110, 750,  100,  30, text='X value')
     $drawBox(yval,        1250, 750,  100,  30, text='Y value')
 
-    $drawBox(i1by, 105, 750, 200, 40, text='w0 bytes: B[x][y]')
-    $drawBox(i2by, 340, 700, 200, 40, text='w1 bytes: B[x+1][y]')
-    $drawBox(i3by, 685, 700, 200, 40, text='w2 bytes: B[x+2][y]')
+    $drawBox(i1by, 145, 700, 200, 40, text='w0 bytes: B[x][y]')
+    $drawBox(i2by, 400, 700, 200, 40, text='w1 bytes: B[x+1][y]')
+    $drawBox(i3by, 785, 700, 200, 40, text='w2 bytes: B[x+2][y]')
 
-    $drawBox(i1bi,  45, 360, 320, 50, text='w0 bits')
-    $drawBox(i2bi, 280, 600, 320, 50, text='w1 bits')
-    $drawBox(i3bi, 625, 600, 320, 50, text='w2 bits')
+    $drawBox(i2bi, 340, 600, 320, 50, text='w1 bits')
+    $drawBox(i3bi, 725, 600, 320, 50, text='w2 bits')
 
-    $drawBox(not, 415, 520, 50, 40, text='NOT')
+    $drawBox(not, 475, 525, 50, 40, text='NOT')
 
-    $db(ni2,    280, 440, 320, 50, text='NOT w1')
-    $db(and,    760, 440, 50,  50, text='AND')
-    $db(ni2ai3, 625, 360, 320, 50, text='NOT w1 AND w2')
-    $db(xor,    495, 360, 50,  50, text='XOR')
+    $drawBox(ni2, 340, 445, 320, 50, text='NOT w1')
+    $drawBox(and, 860, 445, 50,  50, text='AND')
 
-    $drawBox(obi, 360, 280,  320, 50, text='XOR output bits')
-    $drawBox(oby, 420, 200,  200, 50, text='XOR output bytes')
-    $drawBox(oba, 90,   70, 1055, 90, text='Chi output')
+    $drawBox(i1bi,    85, 360, 320, 50, text='w0 bits')
+    $drawBox(xor,    555, 360, 50,  50, text='XOR')
+    $drawBox(ni2ai3, 725, 360, 320, 50, text='NOT w1 AND w2')
+
+    $drawBox(obi, 420, 270,  320, 50, text='XOR output bits')
+    $drawBox(oby, 480, 190,  200, 50, text='XOR output bytes')
+    $drawBox(oba,  55,  70, 1055, 90, text='Chi output')
 
     $drawArrow(b,i1by)
     $drawArrow(b,i3by)
@@ -38,16 +39,16 @@ Frame 1:
     $drawArrow(i3by,i3bi)
     $drawArrow(i1bi,xor)
 
-    $da(i2bi,not)
-    $da(not,ni2)
-    $da(ni2,and)
-    $da(i3bi,and)
-    $da(and,ni2ai3)
+    $drawArrow(i2bi,not)
+    $drawArrow(not,ni2)
+    $drawArrow(ni2,and)
+    $drawArrow(i3bi,and)
+    $drawArrow(and,ni2ai3)
 
     $drawArrow(ni2ai3,xor)
     $drawArrow(xor,obi)
     $drawArrow(obi,oby)
-    $da(oby,oba)
+    $drawArrow(oby,oba)
 Frame End
 
 Frame 2:
