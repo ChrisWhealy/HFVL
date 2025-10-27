@@ -121,7 +121,8 @@ while @lt(_roundNum;24):
     Frame End
 
     Frame 18:
-        # This does not evaluate to the same value returned by the SHA3Chi screen
+        # BUG!!
+        # This step does not generate the same value that you get when stepping through the SHA3Chi screen
         $mb(chi,text=@groupAsI64(@chi(*pi)))
     Frame End
 
