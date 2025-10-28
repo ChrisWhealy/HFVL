@@ -2,21 +2,21 @@
 
 Hash Function Visualization Language
 
-Created: Andrew Chabot<br>
-Advisor: Dr. Hans-Peter Bischof
+**Created:** Andrew Chabot<br>
+**Advisor:** Dr. Hans-Peter Bischof
 
-Adapted: Chris Whealy
+**Adapted:** Chris Whealy
 
 A simple to use language called the Hash Function Visualization Language or HFVL.
 
-This repository contains all necessary files for created and running files in the language.
+This repository contains all necessary files for creating and running files defined in this language.
 
-Visualizations have also been provided for the SHA-1, SHA-2 256 and SHA-3 256 algorithms, called called `SHA1`, `SHA2`, and `SHA3` respectively.
-Within these files, there are link to sub-visualization files that allow you to see how the algorithms work internally.
+Example visualizations have also been provided for the SHA-1, SHA-2 256 and SHA-3 256 algorithms, called`SHA1`, `SHA2`, and `SHA3` respectively.
+Within these files, there are link to sub-visualization files that allow you to see the internal processing steps with each algorithm.
 
 ## Usage
 
-Within a Python 3.9 virtual environment, run `python HFVL.py` .
+Within a Python 3.9 virtual environment, run `python HFVL.py`
 
 You will see a message requesting the name of an input file.
 
@@ -29,14 +29,15 @@ Enter the name of an HFVL file and you should get a message that looks like
 
 # HFVL Language Syntax
 
-The SHA visualizations serve as examples of how to use HFVL.
-The syntax of HFVL is somewhat unique, but simplistic in nature.
+The various SHA visualizations serve as examples of how to use HFVL.
+The language syntax is somewhat simplistic, but provides sufficient tools for being able to visualise the internal workings the different SHA algorithms.
 
 ---
 
 ## Frames
 
 All the visual transitions occur within a basic processing unit known as a `Frame`.
+A visulaisation must contain at least one frame.
 
 Every frame starts with a `Frame :` command and ends with the `Frame End` command.
 A sample frame statement is below.
@@ -44,7 +45,7 @@ A sample frame statement is below.
 ```
 Frame 1:
 
-Frame Changes
+    Frame Changes
 
 Frame End
 ```
@@ -57,7 +58,10 @@ All mandatory argument values are positional and must be provided without specif
 
 ### `$drawBox`
 
-Creates a box that can contain text and can be connected to other boxes by arrows
+Creates a box that can contain text and can be connected to other boxes by arrows.
+
+`x + width` must be less than the overall window width.<br>
+`y + height` must be less than the overall window height.
 
 | | Name | Value/Units | Description
 |---|---|---|---|
@@ -68,7 +72,7 @@ Creates a box that can contain text and can be connected to other boxes by arrow
 | | `y` | Int, Pixels | Distance from the bottom window edge to the bottom left box corner
 | | `width` | Int, Pixels | Box width
 | | `height` | Int, Pixels | Box height
-| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` (default)
+| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` | `black` is the default
 | | `bold=` | `True`, `False`
 | | `text=` | | Either some hardcoded, quote delimited text, or a box id prefixed with an asterisk (E.G. `text=*some_box`).<br> Hardcoded text must not contain a comma or an equals sign.<br>Use a backslash character `\` for a carriage return.
 | | `link=` | | Name of sub-visualisation HFVL file to open when this box is clicked on
@@ -89,7 +93,7 @@ This function cannot move or resize a box.
 | Command Name | `$modifyBox` |
 | Abbreviation | `$mb` |
 | Mandatory Arguments | `box_id` | text | Unique identifier of the box being modified
-| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` (default)
+| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` | `black` is the default
 | | `bold=` | `True`, `False`
 | | `text=` | | Either some quote delimited text or a box id prefixed with an asterisk (E.G. `text=*some_box`).<br> Must not contain a comma or an equals sign.<br>Use a backslash character `\` for a carriage return.
 | | `link=` | | Name of sub-visualisation HFVL file to open when this box is clicked on
@@ -125,7 +129,7 @@ Draws an arrow between two boxes using a pathfind algorithm
 | Abbreviation | `$da` |
 | Mandatory Arguments | `start_box_id` | text | | Unique identifier of the start box
 | | `start_box_id` | text | | Unique identifier of the end box
-| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` (default)
+| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` | `black` is the default
 | | `bold=` | `True`, `False` |
 
 For example
@@ -144,7 +148,7 @@ This function cannot relocate an arrow to point to different boxes.
 | Abbreviation | `$ma` |
 | Mandatory Arguments | `start_box_id` | text | | Unique identifier of the start box
 | | `start_box_id` | text | | Unique identifier of the end box
-| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` (default)
+| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` | `black` is the default
 | | `bold=` | `True`, `False`
 
 ### `$resetArrow`
@@ -202,6 +206,7 @@ A variety of predefined functions are available that implement the various inter
 | `@bytebit(bytes)`           | Returns input byte string as a bit string
 | `@concat(string1;string2)`  | returns the string concatenation of the input strings
 | `@first272(bytes)`          | Returns the first 272 bytes of the input bytes
+| `@groupAsI64(bytes)`        | Returns the input bytes as a space-delimited list of hexdecimal byte values with an extra space every 8 bytes
 | `@last128(bytes)`           | Returns the last 128 bytes of the input bytes
 | `@last384(bytes)`           | Returns the last 384 bytes of the input bytes
 | `@lbitshift5(bits)`         | Shifts input bits left by 5
