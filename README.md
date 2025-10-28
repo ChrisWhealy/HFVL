@@ -251,7 +251,7 @@ $modifyBox(f,text=@bitbyte(@or(@or(@bytebit(*w2);@bytebit(*w3));@and(@not(@byteb
 
 ### Branching
 
-The `if` key must be followed by a function that returns a boolean.
+The `if` keyword must be followed by a function that returns a boolean.
 Currently, only the `@lt` function is available for this purpose.
 
 `elif` can be used to chain additional `if` statements and `else` can also be used.
