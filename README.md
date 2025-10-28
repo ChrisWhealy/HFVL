@@ -37,9 +37,9 @@ The language syntax is somewhat simplistic, but provides sufficient tools to vis
 ## Frames
 
 All the visual transitions occur within a basic processing unit known as a `Frame`.
-A visulaisation must contain at least one frame.
+A visualisation must contain at least one frame.
 
-Every frame starts with a `Frame :` command and ends with the `Frame End` command.
+Every frame starts with a `Frame <frime_number>:` command and ends with the `Frame End` command.
 A sample frame statement is below.
 
 ```
