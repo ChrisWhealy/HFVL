@@ -268,7 +268,7 @@ else:
 if end
 ```
 
-## Looping
+### Looping
 
 The `while` keyword starts a loop and must be followed by a function that returns a boolean.
 The loop will execute zero or more times and will repeat until the function returns `False`.
