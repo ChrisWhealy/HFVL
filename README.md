@@ -32,6 +32,10 @@ Enter the name of an HFVL file and you should get a message that looks like
 The various SHA visualizations serve as examples of how to use HFVL.
 The language syntax is somewhat simplistic, but provides sufficient tools to visualise the internal workings of the different SHA algorithms.
 
+## Comments
+
+A comment line starts with zero or more whitespace characters followed by a hash `#` character.
+
 ---
 
 ## Frames
