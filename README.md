@@ -146,8 +146,8 @@ This function cannot relocate an arrow to point to different boxes.
 |---|---|---|---|
 | Command Name | `$modifyArrow` |
 | Abbreviation | `$ma` |
-| Mandatory Arguments | `start_box_id` | text | | Unique identifier of the start box
-| | `start_box_id` | text | | Unique identifier of the end box
+| Mandatory Arguments | `start_box_id` | | Unique identifier of the start box
+| | `start_box_id` | | Unique identifier of the end box
 | Optional Arguments | `color=` | `blue`, `green`, `red`, `black` | `black` is the default
 | | `bold=` | `True`, `False`
 
