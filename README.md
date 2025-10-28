@@ -271,7 +271,8 @@ if end
 ### Looping
 
 The `while` keyword starts a loop and must be followed by a function that returns a boolean.
-The loop will execute zero or more times and will repeat until the function returns `False`.
+The statements inside the loop will be executed until the function returns `False`.
+This means the loop will be performed zero or more times.
 Currently, only the `@lt` function is available this purpose.
 
 While loops must end with a `while end` line.
