@@ -127,8 +127,8 @@ Draws an arrow between two boxes using a pathfind algorithm
 |---|---|---|---|
 | Command Name | `$drawArrow` |
 | Abbreviation | `$da` |
-| Mandatory Arguments | `start_box_id` | text | | Unique identifier of the start box
-| | `start_box_id` | text | | Unique identifier of the end box
+| Mandatory Arguments | `start_box_id` | | Unique identifier of the start box
+| | `start_box_id` | | Unique identifier of the end box
 | Optional Arguments | `color=` | `blue`, `green`, `red`, `black` | `black` is the default
 | | `bold=` | `True`, `False` |
 
