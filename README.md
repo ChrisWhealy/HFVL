@@ -8,10 +8,11 @@ Advisor: Dr. Hans-Peter Bischof
 Adapted: Chris Whealy
 
 A simple to use language called the Hash Function Visualization Language or HFVL.
+
 This repository contains all necessary files for created and running files in the language.
-There are also visualizations created in the language for SHA-1, SHA-2 256 and SHA-3 256 available in this repository.
-These are called *SHA1*, *SHA2*, and *SHA3* respectively.
-All of these files link to additional subvisualization files, which are also included in this repository.
+
+Visualizations have also been provided for the SHA-1, SHA-2 256 and SHA-3 256 algorithms, called called `SHA1`, `SHA2`, and `SHA3` respectively.
+Within these files, there are link to sub-visualization files that allow you to see how the algorithms work internally.
 
 ## Usage
 
@@ -26,244 +27,252 @@ Enter the name of an HFVL file and you should get a message that looks like
 > file found, loading visualization for: *SHA1*
 
 
-## Language Syntax
+# HFVL Language Syntax
 
-The SHA visualizations serve as examples on how to use HFVL. The syntax of HFVL is somewhat unique, but simplistic in nature.
+The SHA visualizations serve as examples of how to use HFVL.
+The syntax of HFVL is somewhat unique, but simplistic in nature.
 
-### Frames
+---
 
-All the visual changes occur within Frames.
+## Frames
 
-Every frame is started with a Frame : command and ended with a Frame End command. A sample frame statement is below.
+All the visual transitions occur within a basic processing unit known as a `Frame`.
 
-> Frame 1:
->
-> Frame Changes
->
-> Frame End
+Every frame starts with a `Frame :` command and ends with the `Frame End` command.
+A sample frame statement is below.
+
+```
+Frame 1:
+
+Frame Changes
+
+Frame End
+```
+
+---
 
 ## Visual Functions
 
-The visual functions are below with examples:
+All mandatory argument values are positional and must be provided without specifying the argument name, but all optional argument values must be prefixed by the argument name.
 
-### $drawBox or $db
+### `$drawBox`
 
-The $drawBox function takes in 5 parameters and has 4 optional parameters.
+Creates a box that can contain text and can be connected to other boxes by arrows
 
-> $drawBox(box_id, x, y, width, height, color=, bold=, text=, link=, input=)
->
-> $drawBox(box1, 100, 100, 100, 100, color=blue, bold=True, text='this is box1', link='linkfile', input=box2;box3)
+| | Name | Value/Units | Description
+|---|---|---|---|
+| Command Name | `$drawBox` |
+| Abbreviation | `$db` |
+| Mandatory Arguments | `box_id` | text | Unique identifier for this box. This `id` will be referenced when using functions such as `$modifyBox` or `$drawArrow`
+| | `x` | Int, Pixels | Distance from the left window edge to the bottom left box corner
+| | `y` | Int, Pixels | Distance from the bottom window edge to the bottom left box corner
+| | `width` | Int, Pixels | Box width
+| | `height` | Int, Pixels | Box height
+| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` (default)
+| | `bold=` | `True`, `False`
+| | `text=` | | Either some hardcoded, quote delimited text, or a box id prefixed with an asterisk (E.G. `text=*some_box`).<br> Hardcoded text must not contain a comma or an equals sign.<br>Use a backslash character `\` for a carriage return.
+| | `link=` | | Name of sub-visualisation HFVL file to open when this box is clicked on
+| | `input=` | | Semicolon-separated list of argument values to pass to the sub-visualisation window
 
-The box_id parameter will be the unique identification for the box being drawn
-This id will be referenced when using the $modifyBox function or the $drawArrow function.
+For example
+```
+$drawBox(box1, 100, 100, 100, 100, color=blue, bold=True, text='this is box1', link='linkfile', input=box2;box3)
+```
 
-The x and y coordinates and width and height are used for determining the position and size of the box being drawn. These are necessary paremeters.
+### `$modifyBox`
 
-The optional parameters are color, bold, link, and input.
-All of these parameters require you to use the format 'parameter=' when setting them.
+Modifies a box's optional argument values.
+This function cannot move or resize a box.
 
-The options for color are 'blue', 'red', 'green', and 'black'. 'black' is the default color.
+| | Name | Value/Units | Description
+|---|---|---|---|
+| Command Name | `$modifyBox` |
+| Abbreviation | `$mb` |
+| Mandatory Arguments | `box_id` | text | Unique identifier of the box being modified
+| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` (default)
+| | `bold=` | `True`, `False`
+| | `text=` | | Either some quote delimited text or a box id prefixed with an asterisk (E.G. `text=*some_box`).<br> Must not contain a comma or an equals sign.<br>Use a backslash character `\` for a carriage return.
+| | `link=` | | Name of sub-visualisation HFVL file to open when this box is clicked on
+| | `input=` | | Semicolon-separated list of argument values to pass to the sub-visualisation window
 
-The options for bold are True and False.
+For example
+```
+$modifyBox(box1, color=red, bold=False, link='linkfile2', input=box2)
+```
 
-The text parameter can be any valid text characters.
-This text will be displayed inside of the box, centered if fitting on one line and paragraph style if multi-line. Text can be referenced from another box using that box's id and a * symbol.
+### `$resetBox`
 
->
->     $db(box1,100,100,100,100,text=*box2)
->
+Reverts a box to its default state.
+That is:
 
-For link, the input must be the name of another HFVL filename to be used for subvisualization.
+* Links and inputs are removed (`link=, input=`)
+* `bold=False`
+* `color=black`
+* Text will ***not*** be modified!
 
-For input, the input must be the id of a current box.
-Multiple box ids can be provided but must be seperated by a semicolon.
+For example
+```
+$resetBox(box_id)
+```
 
-### $drawArrow or $da
+### `$drawArrow`
 
-The $drawArrow function takes in 2 parameters and has 2 optional parameters.
+Draws an arrow between two boxes using a pathfind algorithm
 
-> $drawArrow(start_box_id, end_box_id, color=, bold=)
->
-> $drawArrow(box1, box2, color=red, bold=False)
+| | Name | Value/Units | Description
+|---|---|---|---|
+| Command Name | `$drawArrow` |
+| Abbreviation | `$da` |
+| Mandatory Arguments | `start_box_id` | text | | Unique identifier of the start box
+| | `start_box_id` | text | | Unique identifier of the end box
+| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` (default)
+| | `bold=` | `True`, `False` |
 
-The input parameters start_box_id and end_box_id must correspond to valid boxes to draw an arrow between.
-The function will pathfind and draw an arrow that begins at start_box_id and ends at end_box_id.
-These ids will create the id for the arrow.
+For example
+```
+$drawArrow(start_box_id, end_box_id, color=red, bold=True)
+```
 
-The color and bold parameters have the same valid values as mentioned in $drawBox.
+### `$modifyArrow`
 
-### $modifyBox or $mb
+Modifies a arrow's optional argument values.
+This function cannot relocate an arrow to point to different boxes.
 
-The $modifyBox function takes in 1 parameter and has 5 optional parameters.
-This function is used to change the optional parameters of a box.
+| | Name | Value/Units | Description
+|---|---|---|---|
+| Command Name | `$modifyArrow` |
+| Abbreviation | `$ma` |
+| Mandatory Arguments | `start_box_id` | text | | Unique identifier of the start box
+| | `start_box_id` | text | | Unique identifier of the end box
+| Optional Arguments | `color=` | `blue`, `green`, `red`, `black` (default)
+| | `bold=` | `True`, `False`
 
-> $modifyBox(box_id, color=, bold=, text=, link=, input=)
->
-> $modifyBox(box1, color=red, bold=False, link='linkfile2', input=box2)
+### `$resetArrow`
 
-The parameters are identical to those in the $drawBox function.
-If a new link is given, the old link will be removed.
-If a new input is given, the old inputs will be removed and replaced with the new input.
+Reverts an arrow to its default state of `bold=False, color=black`
 
-### $modifyArrow or $ma
+For example
+```
+$resetArrow(arrow_id)
+```
 
-The $modifyArrow function takes in 2 parameters and has 2 optional parameters.
-This function is used to change the optional parameters of an arrow.
+### `$modifyTitle`
 
-> $modifyArrow(start_box_id, end_box_id, color=, bold=)
->
-> $modifyArrow(box1, box2, color=green, bold=True)
+Changes the window's title.
+For example:
 
-The function takes in two box_ids as the id for the arrow to modify.
-The color and bold parameters can then be changed.
+```
+$modifyTitle(text='A New Title', color='red')
+```
 
-### $resetBox or $rb
-
-The $resetBox command is a shortcut to set a box back to default settings.
-This means the box will have links and inputs removed, the box will have bold set to False, the color of the box will be 'black'. **The text of the box will not be modified**.
-> $resetBox(box_id)
->
-> $resetBox(box1)
-
-
-### $resetArrow or $ra
-
-The $resetArrow command is a shortcut to set an arrow back to default settings.
-This means the arrow will have bold set to False, and the color of the arrow will be 'black'.
-> $resetArrow(start_box_id, end_box_id)
->
-> $resetArrow(box1, box2)
-
-### $modifyTitle or $mt
-
-The $modifyTitle command has three optional parameters and is used to change the attributes for the title of the visualization.
-
-> $modifyTitle(text=,color=)
->
-> $modifyTitle(text='Sample Visualization', color='red')
-
+---
 
 ## Variables
-Variables can be used to store string and integer values.
-All variables must begin with an underscore symbol and must be given a value on declaration.
+
+String or integer values can be stored in variables.
+
+All variable names must begin with an underscore character `_` and must be given an initial value at declaration.
+
 String variables should not use quotation marks.
 
-> _stringvar = sample text
->
-> _intvar = 0
+For example:
+```
+_stringValue = sample text
+_intValue = 0
+```
 
+---
 
-## Non-Drawing Functions
-Non-drawing functions are used to modify text and variables.
-All of these functions begin with an `@` symbol.
-Arguments in these functions must be seperated with a semicolon(;).
-These functions are listed below:
+## Calculation Functions
 
-> @bytebit(bytes) - returns converted input byte text into bits
->
-> @bitbyte(bits) - returns converted input bit text into bytes
->
-> @lbitshift5(bits) - left bit shifts input bits by 5 and returns result
->
-> @lbitshift30(bits) - left bit shifts input bits by 30 and returns result
->
-> @rbitshift2(bits) - right bit shifts input bits by 2 and returns result
->
-> @rbitshift13(bits) - right bit shifts input bits by 13 and returns result
->
-> @rbitshift22(bits) - right bit shifts input bits by 22 and returns result
->
-> @rbitshift6(bits) - right bit shifts input bits by 6 and returns result
->
-> @rbitshift11(bits) - right bit shifts input bits by 11 and returns result
->
-> @rbitshift25(bits) - right bit shifts input bits by 25 and returns result
->
-> @rbitshift(bits;amount_to_shift) - right bit shifts input bits by input amount and returns result
->
-> @not(bits) - returns the output of NOT operation on the input bits
->
-> @mod32(bits) - returns the input bits modulo 2^32
->
-> @trunc32(bytes) - returns the first 32 bytes of the input bytes
->
-> @first272(bytes) - returns the first 272 bytes of the input bytes
->
-> @last128(bytes) - returns the last 128 bytes of the input bytes
->
-> @last384(bytes) - returns the last 384 bytes of the input bytes
->
-> @xorloop(a_block_bytes;d_block_bytes) - returns the output of the XORLoop part of the Keccak-f[1600] Theta function being run on the input bytes
->
-> @cfunc(bytes) - returns the output of the C function part of the Keccak-f[1600] Theta function being run on the input bytes
->
-> @dfunc(bytes) - returns the output of the D function part of the Keccak-f[1600] Theta function being run on the input bytes
->
-> @theta(bytes) - returns the output of the Keccak-f[1600] Theta function being run on the input bytes
->
-> @rho(bytes) - returns the output of the Keccak-f[1600] Rho function being run on the input bytes
->
-> @pi(bytes) - returns the output of the Keccak-f[1600] Pi function being run on the input bytes
->
-> @chi(bytes) - returns the output of the Keccak-f[1600] Chi function being run on the input bytes
->
-> @iota(bytes) - returns the output of the Keccak-f[1600] Chi function being run on the input bytes
->
-> @kf1600(capacity;rate) - returns the output of the Keccak-f[1600] function being run on the input capacity and rate
->
-> @add(bits1;bits2) - returns the sum of the two input bit blocks
->
-> @and(bits1;bits2) - returns the result of the AND operation on the two input bit blocks
->
-> @or(bits1;bits2) - returns the result of the OR operation on the two input bit blocks
->
-> @xor(bits1;bits2) - returns the result of the XOR operation on the two input bit blocks
->
-> @indexarr(array;index) - converts the input string into an array and returns the value in the given index of the array
->
-> @indexmat(matrix;row;col) - converts the input string into an matrix and returns the value in the given row and column of the matrix
->
-> @+(num1;num2) - returns the sum of the two input numbers
->
-> @-(num1;num2) - returns the difference of the two input numbers
->
-> @*(num1;num2) - returns the product of the two input numbers
->
-> @mod(num1;num2) - returns the first input number modulo the second input number
->
-> @lt(num1;num2) - returns True if num1 is less than num2, returns False otherwise
->
-> @concat(string1;string2) - returns the string concatenation of the input strings
->
+A variety of predefined functions are available that implement the various internal steps within the secure hash algorithms.
+
+### Syntax Rules
+
+* All function names start with an `@` character.
+* Arguments must be seperated with a semicolon `;`
+
+### Predifined Function
+
+| Function Name | Description
+|---|---
+| `@add(bits1;bits2)`         | Returns the sum of the two input bit blocks
+| `@and(bits1;bits2)`         | Returns the logical `AND` of the two input bit blocks
+| `@bitbyte(bits)`            | Returns input bit string into a byte string
+| `@bytebit(bytes)`           | Returns input byte string as a bit string
+| `@concat(string1;string2)`  | returns the string concatenation of the input strings
+| `@first272(bytes)`          | Returns the first 272 bytes of the input bytes
+| `@last128(bytes)`           | Returns the last 128 bytes of the input bytes
+| `@last384(bytes)`           | Returns the last 384 bytes of the input bytes
+| `@lbitshift5(bits)`         | Shifts input bits left by 5
+| `@lbitshift30(bits)`        | Shifts input bits left by 30
+| `@lt(num1;num2)`            | Returns `True` if `num1` is less than `num2`, else returns `False`
+| `@mod(num1;num2)`           | Returns the first input number modulo the second input number
+| `@mod32(bits)`              | Returns the input bits modulo `2^32`
+| `@not(bits)`                | Returns the logical `NOT` of the input bits
+| `@or(bits1;bits2)`          | Returns the logical `OR` of the two input bit blocks
+| `@rbitshift(bits;shift_by)` | Shifts input bits right by input amount
+| `@rbitshift2(bits)`         | Shifts input bits right by 2
+| `@rbitshift6(bits)`         | Shifts input bits right by 6
+| `@rbitshift11(bits)`        | Shifts input bits right by 11
+| `@rbitshift13(bits)`        | Shifts input bits right by 13
+| `@rbitshift22(bits)`        | Shifts input bits right by 22
+| `@rbitshift25(bits)`        | Shifts input bits right by 25
+| `@trunc32(bytes)`           | Returns the first 32 bytes of the input bytes
+| `@xor(bits1;bits2)`         | Returns the logical `XOR` of the two input bit blocks
+| `@xorloop(a_block;d_block)` | Returns the output of the `XORLoop` part of the `Keccak-f[1600]` `Theta` function
+| `@kf1600(capacity;rate)`    | Returns the output of the `Keccak-f[1600]` function against the input capacity and rate
+| `@cfunc(bytes)`             | Returns the output of the `C` function part of the `Keccak-f[1600]` `Theta` function
+| `@dfunc(bytes)`             | Returns the output of the `D` function part of the `Keccak-f[1600]` `Theta` function
+| `@theta(bytes)`             | Returns the output of the `Keccak-f[1600]` `Theta` function
+| `@rho(bytes)`               | Returns the output of the `Keccak-f[1600]` `Rho` function
+| `@pi(bytes)`                | Returns the output of the `Keccak-f[1600]` `Pi` function
+| `@chi(bytes)`               | Returns the output of the `Keccak-f[1600]` `Chi` function
+| `@iota(bytes)`              | Returns the output of the `Keccak-f[1600]` `Chi` function
+| `@indexarr(array;index)`    | Converts the input string to an array and returns the value at the given index
+| `@indexmat(matrix;row;col)` | Converts the input string to an matrix and returns the value at the given row and column of the matrix
+| `@+(num1;num2)`             | Returns the sum of the two input numbers
+| `@-(num1;num2)`             | Returns the difference of the two input numbers
+| `@*(num1;num2)`             | Returns the product of the two input numbers
 
 These functions can be nested within each other, an example of them being nested in SHA-1 is below for an F function:
 
->     $modifyBox(f,text=@bitbyte(@or(@or(@bytebit(*w2);@bytebit(*w3));@and(@not(@bytebit(*w2));@bytebit(*w4)))))
->
->
+```
+$modifyBox(f,text=@bitbyte(@or(@or(@bytebit(*w2);@bytebit(*w3));@and(@not(@bytebit(*w2));@bytebit(*w4)))))
+```
 
-## If Statements
-If statements begin with a if and a function that evaluates to a boolean.
-Currently the @lt function is the only function that serves this purpose.
-`elif` can be used for additional if statements and 'else' can also be used.
 
-All if statements must end with an 'if end' line.
+## Flow Control
 
->  if @lt(_roundCount;4):
->      $mb(box1,color=blue)
->  elif @lt(_roundCount;8):
->      $mb(box1,color=green)
->  else:
->      $mb(box1,color=red)
->  if end
->
+### Branching
 
-## While Statements
-While loops begin with a while and then a function that evaluates to a boolean.
-Currently the @lt function is the only function that serves this purpose.
+The `if` key must be followed by a function that returns a boolean.
+Currently, only the `@lt` function is available for this purpose.
 
-While loops must end with a 'while end' line.
+`elif` can be used to chain additional `if` statements and `else` can also be used.
 
->      while @lt(_roundNum;25):
->          _roundNum = @+(_roundNum;1)
->      while end
+All if statements must end with an `if end` line.
+
+```
+if @lt(_roundCount;4):
+    $mb(box1,color=blue)
+elif @lt(_roundCount;8):
+    $mb(box1,color=green)
+else:
+    $mb(box1,color=red)
+if end
+```
+
+## Looping
+
+The `while` keyword starts a loop and must be followed by a function that returns a boolean.
+The loop will execute zero or more times and will repeat until the function returns `False`.
+Currently, only the `@lt` function is available this purpose.
+
+While loops must end with a `while end` line.
+
+```
+while @lt(_roundNum;25):
+    _roundNum = @+(_roundNum;1)
+while end
+```
