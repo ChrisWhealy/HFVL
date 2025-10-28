@@ -48,9 +48,7 @@ A sample frame statement is below.
 
 ```
 Frame 1:
-
-    Frame Changes
-
+    # Frame Contents
 Frame End
 ```
 
