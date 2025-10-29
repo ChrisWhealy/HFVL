@@ -1,6 +1,22 @@
+import copy
+
 # helper functions that are used within the HFVL language syntax
 # created by Andrew Chabot
 # RIT Master's Project 2021
+
+BASE_ARRAY_5_EMPTY = ['','','','','']
+BASE_5X5_MATRIX_ZERO = [
+    ['0','0','0','0','0'],
+    ['0','0','0','0','0'],
+    ['0','0','0','0','0'],
+    ['0','0','0','0','0'],
+    ['0','0','0','0','0']]
+BASE_5X5_MATRIX_EMPTY = [
+    ['','','','',''],
+    ['','','','',''],
+    ['','','','',''],
+    ['','','','',''],
+    ['','','','','']]
 
 BIT_BYTE = {
     '0000': '0', '0001': '1', '0010': '2', '0011': '3', '0100': '4', '0101': '5', '0110': '6', '0111': '7',
@@ -474,12 +490,7 @@ def rot(i1, i2):
 
 
 def create_mat(a):
-    a_mat = [
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','','']]
+    a_mat = copy.deepcopy(BASE_5X5_MATRIX_EMPTY)
     a = a.replace(' ', '')
     curr_i = 0
     curr_sub_i = 0
@@ -512,7 +523,7 @@ def un_arr(in_arr):
 
 
 def create_arr(in_str):
-    a_arr = ['', '', '', '', '']
+    a_arr = copy.deepcopy(BASE_ARRAY_5_EMPTY)
     in_str = in_str.replace(' ', '')
     curr_i = 0
     for i in range(0, len(in_str)):
@@ -526,7 +537,7 @@ def create_arr(in_str):
 def c_func(a):
     a = byte_to_bit(a)
     a = create_mat(a)
-    c = ['', '', '', '', '']
+    c = copy.deepcopy(BASE_ARRAY_5_EMPTY)
     for x in range(0, 5):
         c[x] = xor_bit(xor_bit(xor_bit(xor_bit(a[x][0], a[x][1]), a[x][2]), a[x][3]), a[x][4])
 
@@ -536,7 +547,7 @@ def c_func(a):
 def d_func(c_in):
     c_in = byte_to_bit(c_in)
     c_in = create_arr(c_in)
-    d = ['', '', '', '', '']
+    d = copy.deepcopy(BASE_ARRAY_5_EMPTY)
     for x in range(0, 5):
         xplus = x + 1
         if xplus > 4:
@@ -561,8 +572,8 @@ def theta(a):
     a = byte_to_bit(a)
     a = create_mat(a)
 
-    c = ['', '', '', '', '']
-    d = ['', '', '', '', '']
+    c = copy.deepcopy(BASE_ARRAY_5_EMPTY)
+    d = copy.deepcopy(BASE_ARRAY_5_EMPTY)
     for x in range(0, 5):
         c[x] = xor_bit(xor_bit(xor_bit(xor_bit(a[x][0], a[x][1]), a[x][2]), a[x][3]), a[x][4])
 
@@ -591,9 +602,8 @@ def rho(theta_o):
 def pi(rho_o):
     rho_o = byte_to_bit(rho_o)
     rho_o = create_mat(rho_o)
-    pi_o = [['0','0','0','0','0'],['0','0','0','0','0'],['0','0','0','0','0'],['0','0','0','0','0'],['0','0','0','0','0']]
-    b_pi_o = [['0', '0', '0', '0', '0'], ['0', '0', '0', '0', '0'], ['0', '0', '0', '0', '0'], ['0', '0', '0', '0', '0'],
-            ['0', '0', '0', '0', '0']]
+    pi_o = copy.deepcopy(BASE_5X5_MATRIX_ZERO)
+    b_pi_o = copy.deepcopy(BASE_5X5_MATRIX_ZERO)
     for x in range(0, 5):
         for y in range(0, 5):
             second_index = (2 * x) + (3 * y)
@@ -606,12 +616,7 @@ def pi(rho_o):
 def chi(pi_in):
     pi_bits = byte_to_bit(pi_in)
     pi_matrix = create_mat(pi_bits)
-    chi_out = [
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','',''],
-        ['','','','','']]
+    chi_out = copy.deepcopy(BASE_5X5_MATRIX_EMPTY)
 
     for x in range(0, 5):
         for y in range(0, 5):
