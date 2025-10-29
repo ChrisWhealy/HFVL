@@ -222,17 +222,17 @@ def apply_function(func_name, in_args):
             print('wrong number of args for D function, expected 1 got ' + str(len(func_args)))
     elif func_name == 'groupAsI64':
         if len(func_args) == 1:
-            return group_hex_bytes(func_args[0])
+            return group_hex_bytes(func_args[0], 8)
         else:
             print('wrong number of args for group_hex_bytes function, expected 1 got ' + str(len(func_args)))
     return func_name
 
-def group_hex_bytes(hex_string):
+def group_hex_bytes(hex_string, groupSize):
     grouped = []
     bytes_list = hex_string.strip().split()
     for i, byte in enumerate(bytes_list, start=1):
         grouped.append(byte)
-        if i % 8 == 0:
+        if i % groupSize == 0:
             grouped.append('')  # Adds an extra space
     return ' '.join(grouped).strip()
 
@@ -474,7 +474,12 @@ def rot(i1, i2):
 
 
 def create_mat(a):
-    a_mat = [['','','','',''],['','','','',''],['','','','',''],['','','','',''],['','','','','']]
+    a_mat = [
+        ['','','','',''],
+        ['','','','',''],
+        ['','','','',''],
+        ['','','','',''],
+        ['','','','','']]
     a = a.replace(' ', '')
     curr_i = 0
     curr_sub_i = 0
@@ -601,7 +606,12 @@ def pi(rho_o):
 def chi(pi_in):
     pi_bits = byte_to_bit(pi_in)
     pi_matrix = create_mat(pi_bits)
-    chi_out = pi_matrix.copy()
+    chi_out = [
+        ['','','','',''],
+        ['','','','',''],
+        ['','','','',''],
+        ['','','','',''],
+        ['','','','','']]
 
     for x in range(0, 5):
         for y in range(0, 5):
