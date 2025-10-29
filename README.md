@@ -284,3 +284,38 @@ while @lt(_roundNum;25):
     _roundNum = @+(_roundNum;1)
 while end
 ```
+
+### Rounds
+
+Many of the algorithms apply multiple rounds of some processing sequence.
+
+For instance, within the Keccak function, the Chi function applies 24 rounds of `w0 XOR (NOT(w1) AND w2)` where `w0`, `w1`, and `w2` are different 64-bit words taken from the 320-bit input data (treated as a 5x5 matrix).
+
+Each visualisation window provides `Round <` and `Round >` buttons that allow you to step though the processing by an entire round.
+
+Use the `Round` keyword inside a `while` loop to indicate the start of a processing round.
+The `Round <` and `Round >` buttons will then stop the processing loop at this point.
+
+For example:
+
+```
+while @lt(_roundNum;25):
+  # Pick up w0, w1 and w2
+  Round
+  Frame 4:
+      if @lt(_xNum;3):
+          $modifyBox(i2by,color=blue,bold=true,text=@indexmat(*pi;@+(_xNum;1);_yNum))
+          $modifyBox(i3by,color=blue,bold=true,text=@indexmat(*pi;@+(_xNum;2);_yNum))
+      elif @lt(_xNum;4):
+          $modifyBox(i2by,color=blue,bold=true,text=@indexmat(*pi;@+(_xNum;1);_yNum))
+          $modifyBox(i3by,color=blue,bold=true,text=@indexmat(*pi;0;_yNum))
+      else:
+          $modifyBox(i2by,color=blue,bold=true,text=@indexmat(*pi;0;_yNum))
+          $modifyBox(i3by,color=blue,bold=true,text=@indexmat(*pi;1;_yNum))
+      if end
+      $modifyBox(i1by,color=blue,bold=true,text=@indexmat(*pi;_xNum;_yNum))
+  Frame End
+
+  # SNIP
+while end
+```
