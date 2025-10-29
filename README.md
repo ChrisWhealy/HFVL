@@ -26,6 +26,9 @@ Enter the name of an HFVL file and you should get a message that looks like
 
 > file found, loading visualization for: *SHA1*
 
+A visualisation box will then open for the selected HFVL file.
+
+Pressing escape will close a visualisation window.
 
 # HFVL Language Syntax
 
