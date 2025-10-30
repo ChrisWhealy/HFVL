@@ -26,6 +26,7 @@ class FrameDisplayer(pyglet.window.Window):
         prev_window_dict = {}
         for window_arg in window_args:
             try:
+                print(f"Window arg = {window_arg}")
                 prev_window_dict[window_arg] = self.frames[self.frame_num]['box_dict'][window_arg][4]
             except KeyError:
                 print('issues with argument from current window to function window for window arg: ' + window_arg)

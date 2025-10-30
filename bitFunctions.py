@@ -374,6 +374,7 @@ def xor_bit(in_bit_1, in_bit_2):
     in_bit_1 = in_bit_1.replace(' ', '')
     in_bit_2 = in_bit_2.replace(' ', '')
     or_bit_out = ''
+    # print(f"XORing bits: {in_bit_1} {in_bit_2}")
     for i in range(0, len(in_bit_1)):
         if in_bit_1[i] == in_bit_2[i]:
             or_bit_out += '0'
