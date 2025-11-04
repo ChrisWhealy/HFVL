@@ -3,174 +3,175 @@
 _xNum = 0
 Frame 1:
     $modifyTitle(text='Theta D Function Visualization Round 0', color='red')
-    $db(b,340,720,300,90,text='C bytes')
-    $drawBox(i1by,205,620,200,30,text='C[x - 1] bytes')
-    $drawBox(i1bi,190,420,230,50,text='C[x - 1] bits')
-    $drawBox(i2by,585,620,200,30,text='C[x + 1] bytes')
-    $drawBox(i2bi,570,520,230,50,text='C[x + 1] bits')
-    $db(rot,570,420,230,50,text='Right Rotate >> 1')
-    $db(xor,375,320,230,50,text='XOR')
-    $drawBox(oby,390,220,200,50,text='XOR output byte')
-    $drawBox(oba,340,50,300,90,text='D block output')
+
+    $drawBox(b,    390, 820, 200, 90,text='C bytes')
+    $drawBox(i1by, 235, 720, 200, 30, text='C[x - 1] bytes')
+    $drawBox(i2by, 550, 720, 200, 30, text='C[x + 1] bytes')
+    $drawBox(i1bi, 255, 600, 160, 75, text='C[x - 1] bits')
+    $drawBox(i2bi, 570, 600, 160, 75, text='C[x + 1] bits')
+    $drawBox(rot,  570, 500, 160, 75, text='Right Rotate >> 1')
+    $drawBox(xor,  410, 370, 160, 75, text='XOR')
+    $drawBox(oby,  390, 250, 200, 50, text='XOR output byte')
+    $drawBox(oba,  390, 100, 200, 90, text='D block output')
 
     $drawArrow(b,i1by)
     $drawArrow(b,i2by)
     $drawArrow(i1by,i1bi)
     $drawArrow(i2by,i2bi)
     $drawArrow(i1bi,xor)
-    $da(i2bi,rot)
-    $da(rot,xor)
+    $drawArrow(i2bi,rot)
+    $drawArrow(rot,xor)
     $drawArrow(xor,oby)
-    $da(oby,oba)
+    $drawArrow(oby,oba)
 Frame End
 
 Frame 2:
-    $mb(b,color=blue,bold=true,text=*c)
-    $mb(oba,text=' ')
+    $modifyBox(b,color=blue,bold=true,text=*c)
+    $modifyBox(oba,text=' ')
 Frame End
 
 Frame 3:
-    $rb(b)
+    $resetBox(b)
 Frame End
 
 while @lt(_xNum;5):
     Round
     Frame 4:
-        $mb(b,color=blue,bold=true)
-        $ma(b,i2by,color=blue)
-        $ma(b,i1by,color=blue)
+        $modifyBox(b,color=blue,bold=true)
+        $modifyArrow(b,i2by,color=blue)
+        $modifyArrow(b,i1by,color=blue)
     Frame End
 
     Frame 5:
         if @lt(_xNum;1):
-            $mb(i1by,color=blue,bold=true,text=@indexarr(*b;4)
-            $mb(i2by,color=blue,bold=true,text=@indexarr(*b;@+(_xNum;1)))
+            $modifyBox(i1by,color=blue,bold=true,text=@indexarr(*b;4)
+            $modifyBox(i2by,color=blue,bold=true,text=@indexarr(*b;@+(_xNum;1)))
         elif @lt(_xNum;4):
-            $mb(i1by,color=blue,bold=true,text=@indexarr(*b;@-(_xNum;1)))
-            $mb(i2by,color=blue,bold=true,text=@indexarr(*b;@+(_xNum;1)))
+            $modifyBox(i1by,color=blue,bold=true,text=@indexarr(*b;@-(_xNum;1)))
+            $modifyBox(i2by,color=blue,bold=true,text=@indexarr(*b;@+(_xNum;1)))
         else:
-            $mb(i1by,color=blue,bold=true,text=@indexarr(*b;@-(_xNum;1)))
-            $mb(i2by,color=blue,bold=true,text=@indexarr(*b;0))
+            $modifyBox(i1by,color=blue,bold=true,text=@indexarr(*b;@-(_xNum;1)))
+            $modifyBox(i2by,color=blue,bold=true,text=@indexarr(*b;0))
         if end
     Frame End
 
     Frame 6:
-        $rb(b)
-        $ra(b,i2by)
-        $ra(b,i1by)
+        $resetBox(b)
+        $resetArrow(b,i2by)
+        $resetArrow(b,i1by)
     Frame End
 
     Frame 6:
-        $ma(i1by,i1bi,color='blue')
-        $ma(i2by,i2bi,color='blue')
-        $mb(i2bi,color=blue,bold=true)
-        $mb(i1bi,color=blue,bold=true)
+        $modifyArrow(i1by,i1bi,color='blue')
+        $modifyArrow(i2by,i2bi,color='blue')
+        $modifyBox(i2bi,color=blue,bold=true)
+        $modifyBox(i1bi,color=blue,bold=true)
     Frame End
 
     Frame 7:
-        $mb(i1bi,text=@bytebit(*i1by))
-        $mb(i2bi,text=@bytebit(*i2by))
+        $modifyBox(i1bi,text=@bytebit(*i1by))
+        $modifyBox(i2bi,text=@bytebit(*i2by))
     Frame End
 
     Frame 8:
-        $rb(i1bi)
-        $rb(i2bi)
-        $rb(i1by)
-        $rb(i2by)
-        $ra(i1by,i1bi)
-        $ra(i2by,i2bi)
+        $resetBox(i1bi)
+        $resetBox(i2bi)
+        $resetBox(i1by)
+        $resetBox(i2by)
+        $resetArrow(i1by,i1bi)
+        $resetArrow(i2by,i2bi)
     Frame End
 
     Frame 9:
-        $mb(i2bi,color=green,bold=true)
-        $ma(i2bi,rot,color=green)
+        $modifyBox(i2bi,color=green,bold=true)
+        $modifyArrow(i2bi,rot,color=green)
     Frame End
 
     Frame 10:
-        $mb(rot,color=red,bold=true)
+        $modifyBox(rot,color=red,bold=true)
     Frame End
 
     Frame 11:
-        $mb(rot,text=@rbitshift(*i2bi;1))
+        $modifyBox(rot,text=@rbitshift(*i2bi;1))
     Frame End
 
     Frame 12:
-        $rb(i2bi)
-        $rb(rot)
-        $ra(i2bi,rot)
+        $resetBox(i2bi)
+        $resetBox(rot)
+        $resetArrow(i2bi,rot)
     Frame End
 
     Frame 13:
-        $mb(i1bi,color=green,bold=true)
-        $mb(rot,color=green,bold=true)
-        $ma(rot,xor,color=green)
-        $ma(i1bi,xor,color=green)
+        $modifyBox(i1bi,color=green,bold=true)
+        $modifyBox(rot,color=green,bold=true)
+        $modifyArrow(rot,xor,color=green)
+        $modifyArrow(i1bi,xor,color=green)
     Frame End
 
     Frame 14:
-        $mb(xor,color=red,bold=true)
+        $modifyBox(xor,color=red,bold=true)
     Frame End
 
     Frame 15:
-        $mb(xor,text=@xor(*i1bi;*rot))
+        $modifyBox(xor,text=@xor(*i1bi;*rot))
     Frame End
 
     Frame 16:
-        $rb(xor)
-        $rb(i1bi)
-        $rb(rot)
-        $ra(rot,xor)
-        $ra(i1bi,xor)
+        $resetBox(xor)
+        $resetBox(i1bi)
+        $resetBox(rot)
+        $resetArrow(rot,xor)
+        $resetArrow(i1bi,xor)
     Frame End
 
     Frame 17:
-        $mb(xor,color=blue,bold=true)
-        $ma(xor,oby,color=blue)
+        $modifyBox(xor,color=blue,bold=true)
+        $modifyArrow(xor,oby,color=blue)
     Frame End
 
     Frame 18:
-        $mb(oby,color=blue,bold=true,text=@bitbyte(*xor))
+        $modifyBox(oby,color=blue,bold=true,text=@bitbyte(*xor))
     Frame End
 
     Frame 19:
-        $rb(oby)
-        $rb(xor)
-        $ra(xor,oby)
+        $resetBox(oby)
+        $resetBox(xor)
+        $resetArrow(xor,oby)
     Frame End
 
     Frame 20:
-        $mb(oby,color=blue,bold=true)
-        $ma(oby,oba,color=blue)
+        $modifyBox(oby,color=blue,bold=true)
+        $modifyArrow(oby,oba,color=blue)
     Frame End
 
     Frame 21:
         if @lt(_xNum;1):
-            $mb(oba,color=blue,bold=true,text=*oby)
+            $modifyBox(oba,color=blue,bold=true,text=*oby)
         else:
-            $mb(oba,color=blue,bold=true,text=@concat(@concat(*oba;' ');*oby)
+            $modifyBox(oba,color=blue,bold=true,text=@concat(@concat(*oba;' ');*oby)
         if end
     Frame End
 
     Frame 22:
-        $rb(oba)
-        $rb(oby)
-        $ra(oby,oba)
+        $resetBox(oba)
+        $resetBox(oby)
+        $resetArrow(oby,oba)
     Frame End
 
     _xNum = @+(_xNum;1)
     Frame 26:
         $modifyTitle(text=@concat('Theta D Function Visualization Round ';_xNum), color='red')
-        $mb(i1by,text='C[x - 1] bytes')
-        $mb(i1bi,text='C[x - 1] bits')
-        $mb(i2by,text='C[x + 1] bytes')
-        $mb(i2bi,text='C[x + 1] bits')
-        $mb(rot,text='Right Rotate >> 1')
-        $mb(xor,text='XOR')
-        $mb(oby,text='XOR output byte')
+        $modifyBox(i1by,text='C[x - 1] bytes')
+        $modifyBox(i1bi,text='C[x - 1] bits')
+        $modifyBox(i2by,text='C[x + 1] bytes')
+        $modifyBox(i2bi,text='C[x + 1] bits')
+        $modifyBox(rot,text='Right Rotate >> 1')
+        $modifyBox(xor,text='XOR')
+        $modifyBox(oby,text='XOR output byte')
     Frame End
 While End
 
 Round
 Frame 27:
-    $mb(oba,color=red,bold=True)
+    $modifyBox(oba,color=red,bold=True)
 Frame End

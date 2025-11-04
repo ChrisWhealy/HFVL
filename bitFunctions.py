@@ -282,7 +282,11 @@ def byte_to_bit(in_byte):
     in_byte = in_byte.replace(' ', '')
     in_bit = ''
     for i in range(0, len(in_byte)):
-        in_bit += BYTE_BIT[in_byte[i]]
+        try:
+            in_bit += BYTE_BIT[in_byte[i]]
+        except KeyError:
+            print('invalid hex character in byte to bit conversion: ' + in_byte[i])
+            in_bit += '0000'
         if (i + 1) % 2 == 0 and (i + 1) != len(in_byte):
             in_bit += ' '
     return in_bit
@@ -374,7 +378,6 @@ def xor_bit(in_bit_1, in_bit_2):
     in_bit_1 = in_bit_1.replace(' ', '')
     in_bit_2 = in_bit_2.replace(' ', '')
     or_bit_out = ''
-    # print(f"XORing bits: {in_bit_1} {in_bit_2}")
     for i in range(0, len(in_bit_1)):
         if in_bit_1[i] == in_bit_2[i]:
             or_bit_out += '0'

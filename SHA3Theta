@@ -2,114 +2,117 @@
 # input: a
 Frame 1:
     $modifyTitle(text='Theta Function Visualization', color='red')
+    $drawBox(description, 1120, 800, 340, 140, text='Description of events')
 
-    $drawBox(aInput,   55, 860, 1055,  90, text='A bytes')
-    $drawBox(desc,   1120, 810,  340, 140, text='Description of events')
-    $drawBox(cFunc,    55, 680,  200,  90, text='C function')
-    $drawBox(dFunc,    55, 500,  200,  90, text='D function')
-    $drawBox(aInput2, 275, 500, 1055,  90, text='A bytes')
-    $drawBox(xorLoop,  55, 290,  860,  90, text='XOR Loop')
-    $drawBox(oby,      55,  90, 1055,  90, text='Theta output')
+    $drawBox(a1,       55, 850, 1055, 90, text='A bytes')
+    $drawBox(c,        55, 650,  205, 90, text='C function')
+    $drawBox(d,        55, 460,  205, 90, text='D function')
+    $drawBox(a2,      270, 460, 1055, 90, text='A bytes')
+    $drawBox(xorLoop, 270, 260, 1055, 90, text='XOR Loop')
+    $drawBox(oby,     270, 100, 1055, 90, text='Theta output')
 
-    $drawArrow(aInput, cFunc)
-    $drawArrow(cFunc, dFunc)
-    $drawArrow(dFunc, xorLoop)
-    $drawArrow(aInput2, xorLoop)
-    $drawArrow(xorLoop, oby)
+    $drawArrow(a1,c)
+    $drawArrow(c,d)
+    $drawArrow(d,xorLoop)
+    $drawArrow(a2,xorLoop)
+    $drawArrow(xorLoop,oby)
 Frame End
 
 Frame 2:
-    $modifyBox(desc, color=blue, text='Take the initial A block as input and start out with this value. This will be input to the xor loop and C functions.')
-    $modifyBox(aInput, color=blue, bold=true, text=*a)
-    $modifyBox(aInput2, color=blue, bold=true, text=*a)
+    $modifyBox(description,color=blue,text='The A block is input to the C function D function and XOR loop')
+    $modifyBox(a1,color=blue,bold=true,text=*a)
+    $modifyBox(a2,color=blue,bold=true,text=*a)
 Frame End
 
 Frame 3:
-    $resetBox(desc)
-    $resetBox(aInput)
-    $resetBox(aInput2)
+    $resetBox(description)
+    $resetBox(a1)
+    $resetBox(a2)
 Frame End
 
 Frame 4:
-    $modifyBox(desc, color=blue, text='Take the A block and input it into the C function. Click on the C function box to view bit details. This function is simplified as\ for x in (0..4):\ C[x]: A[x][0] xor A[x][1] xor A[x][2] xor A[x][3] xor A[x][4]')
-    $modifyBox(aInput, color=green, bold=true)
-    $modifyArrow(aInput,cFunc,color=green)
+    $modifyBox(description,color=blue,text='Pass the A block to the C function.')
+    $modifyBox(a1,color=green,bold=true)
+    $modifyArrow(a1,c,color=green)
 Frame End
 
 Frame 5:
-    $modifyBox(cFunc, color=red, bold=true, link='SHA3ThetaC', input=a)
+    $modifyBox(description,color=blue,text='Click on the C function to see bit-level details.\\This function is simplified as\ for x in (0..4):\     C[x]: A[x][0] XOR A[x][1] XOR A[x][2] XOR A[x][3] XOR A[x][4]')
+    $modifyBox(c,color=red,bold=true,link='SHA3ThetaC',input=a1)
 Frame End
 
 Frame 6:
-    $modifyBox(cFunc, text=@cfunc(*a))
+    $modifyBox(c,text=@cfunc(*a))
 Frame End
 
 Frame 7:
-    $resetBox(desc)
-    $resetBox(cFunc)
-    $resetBox(aInput)
-    $resetArrow(aInput,cFunc)
+    $resetBox(description)
+    $resetBox(c)
+    $resetBox(a1)
+    $resetArrow(a1,c)
 Frame End
 
 Frame 8:
-    $modifyBox(desc, color=blue, text='Take the C block and input it into the dFunc function. Click on the dFunc function box to learn more. This function is simplified as\ for x in (0..4):\ D[x]: C[x-1] xor (right rotate 1(C[x+1])')
-    $modifyBox(cFunc, color=green, bold=true)
-    $modifyArrow(cFunc,dFunc,color=green)
+    $modifyBox(description,color=blue,text='Pass the C function output to the D function')
+    $modifyBox(c,color=green,bold=true)
+    $modifyArrow(c,d,color=green)
 Frame End
 
 Frame 9:
-    $modifyBox(dFunc, color=red, bold=true, link='SHA3ThetaD', input=cFunc)
+    $modifyBox(description,color=blue,text='Click on the D function to see bit-level details.\This function is simplified as\ for x in (0..4):\     D[x]: C[x-1] XOR ROTR(C[x+1] 1)')
+    $modifyBox(d,color=red,bold=true,link='SHA3ThetaD',input=c)
 Frame End
 
 Frame 10:
-    $modifyBox(dFunc, text=@dfunc(*cFunc))
+    $modifyBox(d,text=@dfunc(*c))
 Frame End
 
 Frame 11:
-    $resetBox(desc)
-    $resetBox(cFunc)
-    $resetBox(dFunc)
-    $resetArrow(cFunc,dFunc)
+    $resetBox(description)
+    $resetBox(c)
+    $resetBox(d)
+    $resetArrow(c,d)
 Frame End
 
 Frame 12:
-    $modifyBox(desc, color=blue, text='Take the initial A block and dFunc function output as input to the XOR Loop. Click on the XOR loop box to learn more. This loop is simplified as\ for x in (0..4):\ for y in (0..4):\ A[x][y]: A[x][y] xor D[x]')
-    $modifyBox(dFunc, color=green, bold=true)
-    $modifyBox(aInput2, color=green, bold=true)
-    $modifyArrow(dFunc,xorLoop,color=green)
-    $modifyArrow(aInput2,xorLoop,color=green)
+    $modifyBox(description,color=blue,text='Pass the original A block input and D function output to the XOR Loop')
+    $modifyBox(d,color=green,bold=true)
+    $modifyBox(a2,color=green,bold=true)
+    $modifyArrow(d,xorLoop,color=green)
+    $modifyArrow(a2,xorLoop,color=green)
 Frame End
 
 Frame 13:
-    $modifyBox(xorLoop, color=red, bold=true, link='SHA3ThetaXor', input=aInput2;dFunc)
+    $modifyBox(description,color=blue,text='Click on the XOR loop box to see bit-level details.\This loop is simplified as\ for x in (0..4):\     for y in (0..4):\        A[x][y]: A[x][y] xor D[x]')
+    $modifyBox(xorLoop,color=red,bold=true,link='SHA3ThetaXor',input=a2;d)
 Frame End
 
 Frame 14:
-    $modifyBox(xorLoop, text=@xorloop(*aInput2;*dFunc))
+    $modifyBox(xorLoop,text=@groupAsI64(@xorloop(*a2;*d)))
 Frame End
 
 Frame 15:
-    $resetBox(desc)
+    $resetBox(description)
     $resetBox(xorLoop)
-    $resetBox(aInput2)
-    $resetBox(dFunc)
-    $resetArrow(dFunc,xorLoop)
-    $resetArrow(aInput2,xorLoop)
+    $resetBox(a2)
+    $resetBox(d)
+    $resetArrow(d,xorLoop)
+    $resetArrow(a2,xorLoop)
 Frame End
 
 Frame 16:
-    $modifyBox(desc, color=blue, text='Take the initial XOR Loop output as our output byte block for the entire Theta step. We have now finished the Theta function in Keccak-f[1600]')
-    $modifyBox(xorLoop, color=blue, bold=true)
+    $modifyBox(description,color=blue,text='The XOR Loop output is the output of the Theta function')
+    $modifyBox(xorLoop,color=blue,bold=true)
     $modifyArrow(xorLoop,oby,color=blue)
 Frame End
 
 Frame 17:
-    $modifyBox(oby, color=blue, bold=true, text=@groupAsI64(*xorLoop))
+    $modifyBox(oby,color=blue,bold=true,text=*xorLoop)
 Frame End
 
 Frame 18:
-    $resetBox(desc)
+    $resetBox(description)
     $resetBox(xorLoop)
     $resetArrow(xorLoop,oby)
-    $modifyBox(oby, color=red)
+    $modifyBox(oby,color=red)
 Frame End

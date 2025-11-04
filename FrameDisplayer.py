@@ -29,7 +29,7 @@ class FrameDisplayer(pyglet.window.Window):
                 print(f"Window arg = {window_arg}")
                 prev_window_dict[window_arg] = self.frames[self.frame_num]['box_dict'][window_arg][4]
             except KeyError:
-                print('issues with argument from current window to function window for window arg: ' + window_arg)
+                print('Unable to pass window arg "' + window_arg + '" from current window to function window')
         HFVL.run_frames(file_name, prev_window_dict)
 
     def next_frame(self):
@@ -39,14 +39,14 @@ class FrameDisplayer(pyglet.window.Window):
                 self.start_stop_frames()
         else:
             self.frame_num += 1
-        print('next frame!')
+        print('advancing to frame ' + str(self.frame_num))
 
     def previous_frame(self):
         if self.frame_num == 0:
             print('Can\'t go back past the first frame!')
         else:
             self.frame_num -= 1
-        print('previous frame!')
+        print('reversing to frame ' + str(self.frame_num))
 
     def next_round(self):
         for i in range(0, len(self.round_splits)):

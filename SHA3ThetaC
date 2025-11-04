@@ -3,26 +3,27 @@
 _xNum = 0
 Frame 1:
     $modifyTitle(text='Theta C Function Visualization Round 0', color='red')
-    $db(b,100,720,1015,90,text='A bytes')
+    $drawBox(b,    100, 810, 1055, 90, text='A bytes')
 
-    $drawBox(i1by,25,630,200,30,text='A[x][0] bytes')
-    $drawBox(i2by,255,620,200,30,text='A[x][1] bytes')
-    $drawBox(i3by,485,610,200,30,text='A[x][2] bytes')
-    $drawBox(i4by,715,620,200,30,text='A[x][3] bytes')
-    $drawBox(i5by,945,630,200,30,text='A[x][4] bytes')
+    $drawBox(i1by,  70, 650, 200, 30, text='A[x][0] bytes')
+    $drawBox(i2by, 300, 640, 200, 30, text='A[x][1] bytes')
+    $drawBox(i3by, 530, 630, 200, 30, text='A[x][2] bytes')
+    $drawBox(i4by, 760, 640, 200, 30, text='A[x][3] bytes')
+    $drawBox(i5by, 990, 650, 200, 30, text='A[x][4] bytes')
 
-    $drawBox(i1bi,10,550,230,50,text='A[x][0] bits')
-    $drawBox(i2bi,240,550,230,50,text='A[x][1] bits')
-    $drawBox(i3bi,470,430,230,50,text='A[x][2] bits')
-    $drawBox(i4bi,700,310,230,50,text='A[x][3] bits')
-    $drawBox(i5bi,930,190,230,50,text='A[x][4] bits')
+    $drawBox(i1bi,   90, 510, 160, 75, text='A[x][0] bits')
+    $drawBox(i2bi,  320, 510, 160, 75, text='A[x][1] bits')
+    $drawBox(i3bi,  550, 510, 160, 75, text='A[x][2] bits')
+    $drawBox(i4bi,  780, 510, 160, 75, text='A[x][3] bits')
+    $drawBox(i5bi, 1010, 510, 160, 75, text='A[x][4] bits')
 
-    $db(xor1,125,430,230,50,text='XOR')
-    $db(xor2,305,310,230,50,text='XOR')
-    $db(xor3,510,190,230,50,text='XOR')
-    $db(xor4,715,70,230,50,text='XOR')
-    $drawBox(oby,440,70,200,50,text='XOR output byte')
-    $drawBox(oba,90,50,300,90,text='C block output')
+    $drawBox(xor1,  320, 380, 160, 75, text='XOR')
+    $drawBox(xor2,  550, 380, 160, 75, text='XOR')
+    $drawBox(xor3,  780, 380, 160, 75, text='XOR')
+    $drawBox(xor4, 1010, 380, 160, 75, text='XOR')
+
+    $drawBox(oby, 990, 280, 200, 50, text='XOR output bytes')
+    $drawBox(oba, 990, 130, 200, 90, text='C block output')
 
     $drawArrow(b,i3by)
     $drawArrow(b,i4by)
@@ -35,7 +36,6 @@ Frame 1:
     $drawArrow(i3by,i3bi)
     $drawArrow(i4by,i4bi)
     $drawArrow(i5by,i5bi)
-
     $drawArrow(i1bi,xor1)
     $drawArrow(i2bi,xor1)
     $drawArrow(xor1,xor2)
@@ -46,238 +46,238 @@ Frame 1:
     $drawArrow(i5bi,xor4)
 
     $drawArrow(xor4,oby)
-    $da(oby,oba)
+    $drawArrow(oby,oba)
 Frame End
 
 Frame 2:
-    $mb(b,color=blue,bold=true,text=*a1)
-    $mb(oba,text=' ')
+    $modifyBox(b,color=blue,bold=true,text=*a1)
+    $modifyBox(oba,text=' ')
 Frame End
 
 Frame 3:
-    $rb(b)
+    $resetBox(b)
 Frame End
 
 while @lt(_xNum;5):
     Round
     Frame 4:
-        $mb(b,color=blue,bold=true)
-        $ma(b,i2by,color=blue)
-        $ma(b,i1by,color=blue)
-        $ma(b,i3by,color=blue)
-        $ma(b,i4by,color=blue)
-        $ma(b,i5by,color=blue)
+        $modifyBox(b,color=blue,bold=true)
+        $modifyArrow(b,i2by,color=blue)
+        $modifyArrow(b,i1by,color=blue)
+        $modifyArrow(b,i3by,color=blue)
+        $modifyArrow(b,i4by,color=blue)
+        $modifyArrow(b,i5by,color=blue)
     Frame End
 
     Frame 5:
-        $mb(i1by,color=blue,bold=true,text=@indexmat(*a1;_xNum;0)
-        $mb(i2by,color=blue,bold=true,text=@indexmat(*a1;_xNum;1)
-        $mb(i3by,color=blue,bold=true,text=@indexmat(*a1;_xNum;2)
-        $mb(i4by,color=blue,bold=true,text=@indexmat(*a1;_xNum;3)
-        $mb(i5by,color=blue,bold=true,text=@indexmat(*a1;_xNum;4)
+        $modifyBox(i1by,color=blue,bold=true,text=@indexmat(*a1;_xNum;0))
+        $modifyBox(i2by,color=blue,bold=true,text=@indexmat(*a1;_xNum;1))
+        $modifyBox(i3by,color=blue,bold=true,text=@indexmat(*a1;_xNum;2))
+        $modifyBox(i4by,color=blue,bold=true,text=@indexmat(*a1;_xNum;3))
+        $modifyBox(i5by,color=blue,bold=true,text=@indexmat(*a1;_xNum;4))
     Frame End
 
     Frame 6:
-        $rb(i1by)
-        $rb(i2by)
-        $rb(i3by)
-        $rb(i4by)
-        $rb(i5by)
-        $ra(b,i1by)
-        $ra(b,i2by)
-        $ra(b,i3by)
-        $ra(b,i4by)
-        $ra(b,i5by)
-        $rb(b)
+        $resetBox(i1by)
+        $resetBox(i2by)
+        $resetBox(i3by)
+        $resetBox(i4by)
+        $resetBox(i5by)
+        $resetArrow(b,i1by)
+        $resetArrow(b,i2by)
+        $resetArrow(b,i3by)
+        $resetArrow(b,i4by)
+        $resetArrow(b,i5by)
+        $resetBox(b)
     Frame End
 
     Frame 7:
-        $mb(i1by,color=blue,bold=true)
-        $mb(i2by,color=blue,bold=true)
-        $mb(i3by,color=blue,bold=true)
-        $mb(i4by,color=blue,bold=true)
-        $mb(i5by,color=blue,bold=true)
-        $ma(i1by,i1bi,color=blue)
-        $ma(i2by,i2bi,color=blue)
-        $ma(i3by,i3bi,color=blue)
-        $ma(i4by,i4bi,color=blue)
-        $ma(i5by,i5bi,color=blue)
+        $modifyBox(i1by,color=blue,bold=true)
+        $modifyBox(i2by,color=blue,bold=true)
+        $modifyBox(i3by,color=blue,bold=true)
+        $modifyBox(i4by,color=blue,bold=true)
+        $modifyBox(i5by,color=blue,bold=true)
+        $modifyArrow(i1by,i1bi,color=blue)
+        $modifyArrow(i2by,i2bi,color=blue)
+        $modifyArrow(i3by,i3bi,color=blue)
+        $modifyArrow(i4by,i4bi,color=blue)
+        $modifyArrow(i5by,i5bi,color=blue)
     Frame End
 
     Frame 8:
-        $mb(i1bi,color=blue,bold=true,text=@bytebit(*i1by))
-        $mb(i2bi,color=blue,bold=true,text=@bytebit(*i2by))
-        $mb(i3bi,color=blue,bold=true,text=@bytebit(*i3by))
-        $mb(i4bi,color=blue,bold=true,text=@bytebit(*i4by))
-        $mb(i5bi,color=blue,bold=true,text=@bytebit(*i5by))
+        $modifyBox(i1bi,color=blue,bold=true,text=@bytebit(*i1by))
+        $modifyBox(i2bi,color=blue,bold=true,text=@bytebit(*i2by))
+        $modifyBox(i3bi,color=blue,bold=true,text=@bytebit(*i3by))
+        $modifyBox(i4bi,color=blue,bold=true,text=@bytebit(*i4by))
+        $modifyBox(i5bi,color=blue,bold=true,text=@bytebit(*i5by))
     Frame End
 
     Frame 9:
-        $rb(i1bi)
-        $rb(i2bi)
-        $rb(i3bi)
-        $rb(i4bi)
-        $rb(i5bi)
-        $rb(i1by)
-        $rb(i2by)
-        $rb(i3by)
-        $rb(i4by)
-        $rb(i5by)
-        $ra(i1by,i1bi)
-        $ra(i2by,i2bi)
-        $ra(i3by,i3bi)
-        $ra(i4by,i4bi)
-        $ra(i5by,i5bi)
+        $resetBox(i1bi)
+        $resetBox(i2bi)
+        $resetBox(i3bi)
+        $resetBox(i4bi)
+        $resetBox(i5bi)
+        $resetBox(i1by)
+        $resetBox(i2by)
+        $resetBox(i3by)
+        $resetBox(i4by)
+        $resetBox(i5by)
+        $resetArrow(i1by,i1bi)
+        $resetArrow(i2by,i2bi)
+        $resetArrow(i3by,i3bi)
+        $resetArrow(i4by,i4bi)
+        $resetArrow(i5by,i5bi)
     Frame End
 
     Frame 10:
-        $mb(i1bi,color=green,bold=true)
-        $ma(i1bi,xor1,color=green)
-        $mb(i2bi,color=green,bold=true)
-        $ma(i2bi,xor1,color=green)
+        $modifyBox(i1bi,color=green,bold=true)
+        $modifyArrow(i1bi,xor1,color=green)
+        $modifyBox(i2bi,color=green,bold=true)
+        $modifyArrow(i2bi,xor1,color=green)
     Frame End
 
     Frame 11:
-        $mb(xor1,color=red,bold=true)
+        $modifyBox(xor1,color=red,bold=true)
     Frame End
 
     Frame 12:
-        $mb(xor1,text=@xor(*i1bi;*i2bi))
+        $modifyBox(xor1,text=@xor(*i1bi;*i2bi))
     Frame End
 
     Frame 13:
-        $rb(xor1)
-        $rb(i1bi)
-        $rb(i2bi)
-        $ra(i2bi,xor1)
-        $ra(i1bi,xor1)
+        $resetBox(xor1)
+        $resetBox(i1bi)
+        $resetBox(i2bi)
+        $resetArrow(i2bi,xor1)
+        $resetArrow(i1bi,xor1)
     Frame End
 
     Frame 14:
-        $mb(xor1,color=green,bold=true)
-        $ma(xor1,xor2,color=green)
-        $mb(i3bi,color=green,bold=true)
-        $ma(i3bi,xor2,color=green)
+        $modifyBox(xor1,color=green,bold=true)
+        $modifyArrow(xor1,xor2,color=green)
+        $modifyBox(i3bi,color=green,bold=true)
+        $modifyArrow(i3bi,xor2,color=green)
     Frame End
 
     Frame 15:
-        $mb(xor2,color=red,bold=true)
+        $modifyBox(xor2,color=red,bold=true)
     Frame End
 
     Frame 16:
-        $mb(xor2,text=@xor(*i3bi;*xor1))
+        $modifyBox(xor2,text=@xor(*i3bi;*xor1))
     Frame End
 
     Frame 17:
-        $rb(xor2)
-        $rb(xor1)
-        $rb(i3bi)
-        $ra(xor1,xor2)
-        $ra(i3bi,xor2)
+        $resetBox(xor2)
+        $resetBox(xor1)
+        $resetBox(i3bi)
+        $resetArrow(xor1,xor2)
+        $resetArrow(i3bi,xor2)
     Frame End
 
     Frame 18:
-        $mb(xor2,color=green,bold=true)
-        $ma(xor2,xor3,color=green)
-        $mb(i4bi,color=green,bold=true)
-        $ma(i4bi,xor3,color=green)
+        $modifyBox(xor2,color=green,bold=true)
+        $modifyArrow(xor2,xor3,color=green)
+        $modifyBox(i4bi,color=green,bold=true)
+        $modifyArrow(i4bi,xor3,color=green)
     Frame End
 
     Frame 19:
-        $mb(xor3,color=red,bold=true)
+        $modifyBox(xor3,color=red,bold=true)
     Frame End
 
     Frame 20:
-        $mb(xor3,text=@xor(*i4bi;*xor2))
+        $modifyBox(xor3,text=@xor(*i4bi;*xor2))
     Frame End
 
     Frame 21:
-        $rb(xor3)
-        $rb(xor2)
-        $rb(i4bi)
-        $ra(xor2,xor3)
-        $ra(i4bi,xor3)
+        $resetBox(xor3)
+        $resetBox(xor2)
+        $resetBox(i4bi)
+        $resetArrow(xor2,xor3)
+        $resetArrow(i4bi,xor3)
     Frame End
 
     Frame 22:
-        $mb(xor3,color=green,bold=true)
-        $ma(xor3,xor4,color=green)
-        $mb(i5bi,color=green,bold=true)
-        $ma(i5bi,xor4,color=green)
+        $modifyBox(xor3,color=green,bold=true)
+        $modifyArrow(xor3,xor4,color=green)
+        $modifyBox(i5bi,color=green,bold=true)
+        $modifyArrow(i5bi,xor4,color=green)
     Frame End
 
     Frame 23:
-        $mb(xor4,color=red,bold=true)
+        $modifyBox(xor4,color=red,bold=true)
     Frame End
 
     Frame 24:
-        $mb(xor4,text=@xor(*i5bi;*xor3))
+        $modifyBox(xor4,text=@xor(*i5bi;*xor3))
     Frame End
 
     Frame 25:
-        $rb(xor4)
-        $rb(xor3)
-        $rb(i5bi)
-        $ra(xor3,xor4)
-        $ra(i5bi,xor4)
+        $resetBox(xor4)
+        $resetBox(xor3)
+        $resetBox(i5bi)
+        $resetArrow(xor3,xor4)
+        $resetArrow(i5bi,xor4)
     Frame End
 
     Frame 26:
-        $mb(xor4,color=blue,bold=true)
-        $ma(xor4,oby,color=blue)
+        $modifyBox(xor4,color=blue,bold=true)
+        $modifyArrow(xor4,oby,color=blue)
     Frame End
 
     Frame 27:
-        $mb(oby,color=blue,bold=true,text=@bitbyte(*xor4))
+        $modifyBox(oby,color=blue,bold=true,text=@bitbyte(*xor4))
     Frame End
 
     Frame 28:
-        $rb(oby)
-        $rb(xor4)
-        $ra(xor4,oby)
+        $resetBox(oby)
+        $resetBox(xor4)
+        $resetArrow(xor4,oby)
     Frame End
 
     Frame 29:
-        $mb(oby,color=blue,bold=true)
-        $ma(oby,oba,color=blue)
+        $modifyBox(oby,color=blue,bold=true)
+        $modifyArrow(oby,oba,color=blue)
     Frame End
 
     Frame 30:
         if @lt(_xNum;1):
-            $mb(oba,color=blue,bold=true,text=*oby)
+            $modifyBox(oba,color=blue,bold=true,text=*oby)
         else:
-            $mb(oba,color=blue,bold=true,text=@concat(@concat(*oba;' ');*oby)
+            $modifyBox(oba,color=blue,bold=true,text=@concat(@concat(*oba;' ');*oby)
         if end
     Frame End
 
     Frame 31:
-        $rb(oba)
-        $rb(oby)
-        $ra(oby,oba)
+        $resetBox(oba)
+        $resetBox(oby)
+        $resetArrow(oby,oba)
     Frame End
 
     Frame 26:
         _xNum = @+(_xNum;1)
         $modifyTitle(text=@concat('Theta C Function Visualization Round ';_xNum), color='red')
-        $mb(i1by,text='A[x][0] bytes')
-        $mb(i1bi,text='A[x][0] bits')
-        $mb(i2by,text='A[x][1] bytes')
-        $mb(i2bi,text='A[x][1] bits')
-        $mb(i3by,text='A[x][2] bytes')
-        $mb(i3bi,text='A[x][2] bits')
-        $mb(i4by,text='A[x][3] bytes')
-        $mb(i4bi,text='A[x][3] bits')
-        $mb(i5by,text='A[x][4] bytes')
-        $mb(i5bi,text='A[x][4] bits')
-        $mb(xor1,text='XOR')
-        $mb(xor2,text='XOR')
-        $mb(xor3,text='XOR')
-        $mb(xor4,text='XOR')
-        $mb(oby,text='XOR output byte')
+        $modifyBox(i1by,text='A[x][0] bytes')
+        $modifyBox(i1bi,text='A[x][0] bits')
+        $modifyBox(i2by,text='A[x][1] bytes')
+        $modifyBox(i2bi,text='A[x][1] bits')
+        $modifyBox(i3by,text='A[x][2] bytes')
+        $modifyBox(i3bi,text='A[x][2] bits')
+        $modifyBox(i4by,text='A[x][3] bytes')
+        $modifyBox(i4bi,text='A[x][3] bits')
+        $modifyBox(i5by,text='A[x][4] bytes')
+        $modifyBox(i5bi,text='A[x][4] bits')
+        $modifyBox(xor1,text='XOR')
+        $modifyBox(xor2,text='XOR')
+        $modifyBox(xor3,text='XOR')
+        $modifyBox(xor4,text='XOR')
+        $modifyBox(oby,text='XOR output bytes')
     Frame End
 While End
 
 Round
 Frame 27:
-    $mb(oba,color=red,bold=True)
+    $modifyBox(oba,color=red,bold=True)
 Frame End
