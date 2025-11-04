@@ -12,7 +12,7 @@ A simple to use language called the Hash Function Visualization Language or HFVL
 This repository contains all necessary files for creating and running files defined in this language.
 
 Example visualizations have also been provided for the SHA-1, SHA-2 256 and SHA-3 256 algorithms, called`SHA1`, `SHA2`, and `SHA3` respectively.
-Within these files, there are link to sub-visualization files that allow you to see the internal processing steps with each algorithm.
+Within these files, there are links to sub-visualization files that allow you to see the internal processing steps within each algorithm.
 
 ## Usage
 
