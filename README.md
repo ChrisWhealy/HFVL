@@ -70,7 +70,7 @@ Creates a box that can contain text and can be connected to other boxes by arrow
 
 | | Name | Value/Units | Description
 |---|---|---|---|
-| Command Name | `$drawBox` |
+| Keyword | `$drawBox` |
 | Abbreviation | `$db` |
 | Mandatory Arguments | `box_id` | text | Unique identifier for this box. This `id` will be referenced when using functions such as `$modifyBox` or `$drawArrow`
 | | `x` | Int, Pixels | Distance from the left window edge to the bottom left box corner
@@ -95,7 +95,7 @@ This function cannot move or resize a box.
 
 | | Name | Value/Units | Description
 |---|---|---|---|
-| Command Name | `$modifyBox` |
+| Keyword | `$modifyBox` |
 | Abbreviation | `$mb` |
 | Mandatory Arguments | `box_id` | text | Unique identifier of the box being modified
 | Optional Arguments | `color=` | `blue`, `green`, `red`, `black` | `black` is the default
@@ -130,7 +130,7 @@ Draws an arrow between two boxes using a pathfind algorithm
 
 | | Name | Value/Units | Description
 |---|---|---|---|
-| Command Name | `$drawArrow` |
+| Keyword | `$drawArrow` |
 | Abbreviation | `$da` |
 | Mandatory Arguments | `start_box_id` | | Unique identifier of the start box
 | | `start_box_id` | | Unique identifier of the end box
@@ -149,7 +149,7 @@ This function cannot relocate an arrow to point to different boxes.
 
 | | Name | Value/Units | Description
 |---|---|---|---|
-| Command Name | `$modifyArrow` |
+| Keyword | `$modifyArrow` |
 | Abbreviation | `$ma` |
 | Mandatory Arguments | `start_box_id` | | Unique identifier of the start box
 | | `start_box_id` | | Unique identifier of the end box
