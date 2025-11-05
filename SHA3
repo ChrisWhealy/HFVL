@@ -2,25 +2,25 @@
 
 Frame 1:
     $modifyTitle(text='SHA-3 256-bit Sponge Function Overview', color='red')
-    $db(description, 1000, 740, 400, 200, text='Description of events')
+    $db(description, 1000, 820, 400, 120, text='Description of events')
 
-    $db(c0,    50, 820, 430, 120, text='Capacity')
-    $db(r0,   480, 820, 200, 120, text='Rate')
+    $db(c0,    50, 800, 430, 140, text='Capacity')
+    $db(r0,   480, 800, 200, 140, text='Rate')
 
-    $db(p0,  1000, 580, 200, 120, text='Input block 0')
-    $db(xor1, 655, 580, 200, 120, text='Rate XORed with input block 0')
-    $db(f0,    50, 590, 430, 100, text='f(Keccak-f[1600])')
+    $db(f0,   165, 700, 200,  50, text='f(Keccak-f[1600])')
+    $db(xor1, 480, 630, 200, 120, text='Rate XORed with input block 0')
+    $db(p0,  1000, 630, 200, 120, text='Input block 0')
 
-    $db(c1,    50, 410, 430, 120, text='Capacity')
-    $db(r1,   480, 410, 200, 120, text='Rate')
+    $db(c1,    50, 440, 430, 140, text='Capacity')
+    $db(r1,   480, 440, 200, 140, text='Rate')
 
-    $db(f1,    50, 240, 430, 100, text='f(Keccak-f[1600])')
-    $db(xor2, 655, 230, 200, 120, text='Rate XORed with input block 1')
-    $db(p1,  1000, 230, 200, 120, text='Input block 1')
+    $db(f1,   165, 340, 200,  50, text='f(Keccak-f[1600])')
+    $db(xor2, 480, 270, 200, 120, text='Rate XORed with input block 1')
+    $db(p1,  1000, 270, 200, 120, text='Input block 1')
 
-    $db(c2,    50,  60, 430, 120, text='Capacity')
-    $db(r2,   480,  60, 200, 120, text='Rate')
-    $db(z0,  1000,  85, 200,  70, text='Output hash')
+    $db(c2,    50,  80, 430, 140, text='Capacity')
+    $db(r2,   480,  80, 200, 140, text='Rate')
+    $db(z0,  1000, 115, 200,  70, text='Output hash')
 
     $da(p0,xor1)
     $da(r0,xor1)
@@ -42,7 +42,7 @@ Frame 1:
 Frame End
 
 Frame 2:
-    $mb(c0,color=blue,bold=True,text='00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00')
+    $mb(c0,color=blue,bold=True,text='00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00  00 00 00 00 00 00 00 00')
     $mb(r0,color=blue,bold=True,text='00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00')
     $mb(description,color=blue,text='Capacity and rate start with initial values of zero.')
 Frame End
@@ -107,7 +107,7 @@ Frame 11:
 Frame End
 
 Frame 12:
-    $mb(c1,color=red,bold=True,text=@first272(@kf1600(*c0;*xor1)))
+    $mb(c1,color=red,bold=True,text=@groupAsI64(@first272(@kf1600(*c0;*xor1))))
     $mb(r1,color=red,bold=True,text=@last128(@kf1600(*c0;*xor1)))
 Frame End
 
@@ -164,7 +164,7 @@ Frame 19:
 Frame End
 
 Frame 20:
-    $mb(c2,color=red,bold=True,text=@first272(@kf1600(*c1;*xor2)))
+    $mb(c2,color=red,bold=True,text=@groupAsI64(@first272(@kf1600(*c1;*xor2))))
     $mb(r2,color=red,bold=True,text=@last128(@kf1600(*c1;*xor2)))
 Frame End
 
