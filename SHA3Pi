@@ -5,169 +5,172 @@ _xNum = 0
 _yNum = 0
 Frame 1:
     $modifyTitle(text='Pi Function Visualization Round 0', color='red')
-    $db(b,55,720,860,90,text='rho bytes')
-    $drawBox(i1by,305,420,200,50,text='rho[x][y] bytes')
-    $drawBox(x,720,620,50,50,text='X')
-    $drawBox(y,820,620,50,50,text='Y')
-    $drawBox(2x3y,745,520,100,50,text='2x + 3y')
-    $db(mod5,745,420,100,50,text='Mod 5')
-    $db(colind,745,320,100,50,text='Column Number')
-    $drawBox(y2,565,420,50,50,text='Y')
-    $db(rowind,540,320,100,50,text='Row Number')
+    $drawBox(b,             45, 850, 1055,  90, text='Rho bytes')
+    $drawBox(description, 1120, 800,  340, 140, text='Description of events')
 
-    $db(o00,90,180,200,30,text=' ')
-    $db(o01,290,180,200,30,text=' ')
-    $db(o02,490,180,200,30,text=' ')
-    $db(o03,690,180,200,30,text=' ')
-    $db(o04,890,180,200,30,text=' ')
-    $db(o10,90,150,200,30,text=' ')
-    $db(o11,290,150,200,30,text=' ')
-    $db(o12,490,150,200,30,text=' ')
-    $db(o13,690,150,200,30,text=' ')
-    $db(o14,890,150,200,30,text=' ')
-    $db(o20,90,120,200,30,text=' ')
-    $db(o21,290,120,200,30,text=' ')
-    $db(o22,490,120,200,30,text='Output Matrix')
-    $db(o23,690,120,200,30,text=' ')
-    $db(o24,890,120,200,30,text=' ')
-    $db(o30,90,90,200,30,text=' ')
-    $db(o31,290,90,200,30,text=' ')
-    $db(o32,490,90,200,30,text=' ')
-    $db(o33,690,90,200,30,text=' ')
-    $db(o34,890,90,200,30,text=' ')
-    $db(o40,90,60,200,30,text=' ')
-    $db(o41,290,60,200,30,text=' ')
-    $db(o42,490,60,200,30,text=' ')
-    $db(o43,690,60,200,30,text=' ')
-    $db(o44,890,60,200,30,text=' ')
-    $db(description,930,670,240,140,text='Description of events')
+    $drawBox(i1by, 470, 720, 200, 50, text='rho[x][y] bytes')
+    $drawBox(x,    760, 720,  50, 50, text='X')
+    $drawBox(2x3y, 845, 720, 100, 50, text='2x + 3y')
+    $drawBox(y,   1000, 720,  50, 50, text='Y')
 
-    $da(b,i1by)
+    $drawBox(mod5,   845, 620, 100, 50, text='Mod 5')
+    $drawBox(colind, 845, 520, 100, 50, text='Column \Index')
+    $drawBox(rowind, 975, 520, 100, 50, text='Row Index')
 
-    $da(x,2x3y)
-    $da(y,2x3y)
-    $da(y2,rowind)
-    $da(rowind,o02)
-    $da(2x3y,mod5)
-    $da(mod5,colind)
-    $da(colind,o02)
-    $da(i1by,o02)
+    # First row
+    $drawBox(o00,  90, 380, 200, 30, text=' ')
+    $drawBox(o01, 290, 380, 200, 30, text=' ')
+    $drawBox(o02, 490, 380, 200, 30, text=' ')
+    $drawBox(o03, 690, 380, 200, 30, text=' ')
+    $drawBox(o04, 890, 380, 200, 30, text=' ')
+
+    # Second row
+    $drawBox(o10,  90, 350, 200, 30, text=' ')
+    $drawBox(o11, 290, 350, 200, 30, text=' ')
+    $drawBox(o12, 490, 350, 200, 30, text=' ')
+    $drawBox(o13, 690, 350, 200, 30, text=' ')
+    $drawBox(o14, 890, 350, 200, 30, text=' ')
+
+    # Third row
+    $drawBox(o20,  90, 320, 200, 30, text=' ')
+    $drawBox(o21, 290, 320, 200, 30, text=' ')
+    $drawBox(o22, 490, 320, 200, 30, text='Output Matrix')
+    $drawBox(o23, 690, 320, 200, 30, text=' ')
+    $drawBox(o24, 890, 320, 200, 30, text=' ')
+
+    # Fourth row
+    $drawBox(o30,  90, 290, 200, 30, text=' ')
+    $drawBox(o31, 290, 290, 200, 30, text=' ')
+    $drawBox(o32, 490, 290, 200, 30, text=' ')
+    $drawBox(o33, 690, 290, 200, 30, text=' ')
+    $drawBox(o34, 890, 290, 200, 30, text=' ')
+
+    # Fifth row
+    $drawBox(o40,  90, 260, 200, 30, text=' ')
+    $drawBox(o41, 290, 260, 200, 30, text=' ')
+    $drawBox(o42, 490, 260, 200, 30, text=' ')
+    $drawBox(o43, 690, 260, 200, 30, text=' ')
+    $drawBox(o44, 890, 260, 200, 30, text=' ')
+
+    $drawArrow(b,i1by)
+
+    $drawArrow(x,2x3y)
+    $drawArrow(y,2x3y)
+    $drawArrow(y,rowind)
+    $drawArrow(rowind,o02)
+    $drawArrow(2x3y,mod5)
+    $drawArrow(mod5,colind)
+    $drawArrow(colind,o02)
+    $drawArrow(i1by,o02)
 Frame End
 
 Frame 2:
-    $mb(b,color=blue,bold=true,text=*rho)
-    $mb(description,color=blue,text='Populate the output of rho into our input bytes')
+    $modifyBox(b,color=blue,bold=true,text=*rho)
+    $modifyBox(description,color=blue,text='The Pi function takes the output of Rho function as input')
 Frame End
 
 Frame 3:
-    $rb(b)
-    $rb(description)
+    $resetBox(b)
+    $resetBox(description)
 Frame End
 
 while @lt(_roundNum;25):
     Round
     Frame 4:
-        $mb(x,color=blue,bold=true,text=_xNum)
-        $mb(y,color=blue,bold=true,text=_yNum)
-        $mb(y2,color=blue,bold=true,text=_yNum)
-        $mb(i1by,color=blue,bold=true,text=@indexmat(*rho;_xNum;_yNum))
-        $mb(description,color=blue,text='Update the x and y values as well as the current block from our input bytes')
+        $modifyBox(x,    color=blue, bold=true, text=_xNum)
+        $modifyBox(y,    color=blue, bold=true, text=_yNum)
+        $modifyBox(i1by, color=blue, bold=true, text=@indexmat(*rho;_xNum;_yNum))
+        $modifyBox(description, color=blue, text='Update the x and y values as well as the current block from our input bytes')
     Frame End
 
     Frame 5:
-        $rb(x)
-        $rb(y)
-        $rb(i1by)
-        $rb(y2)
-        $rb(description)
+        $resetBox(x)
+        $resetBox(y)
+        $resetBox(i1by)
+        $resetBox(description)
     Frame End
 
     Frame 6:
-        $mb(x,color=green,bold=true)
-        $mb(y,color=green,bold=true)
-        $ma(x,2x3y,color=green)
-        $ma(y,2x3y,color=green)
-        $mb(description,color=blue,text='Take in our x and y values and plug them into the 2 * x + 3 * y equation')
+        $modifyBox(x, color=green, bold=true)
+        $modifyBox(y, color=green, bold=true)
+        $modifyArrow(x,2x3y,color=green)
+        $modifyArrow(y,2x3y,color=green)
+        $modifyBox(description, color=blue, text='Calculate new column number using 2 * x + 3 * y MOD 5')
     Frame End
 
     Frame 7:
-        $mb(2x3y,color=red,bold=true,text=@+(@*(_xNum;2);@*(_yNum;3)))
+        $modifyBox(2x3y,color=red,bold=true,text=@+(@*(_xNum;2);@*(_yNum;3)))
     Frame End
 
     Frame 8:
-        $rb(2x3y)
-        $rb(x)
-        $rb(y)
-        $ra(x,2x3y)
-        $ra(y,2x3y)
-        $rb(description)
+        $resetBox(2x3y)
+        $resetBox(x)
+        $resetBox(y)
+        $resetArrow(x,2x3y)
+        $resetArrow(y,2x3y)
+        $resetBox(description)
     Frame End
 
     Frame 9:
-        $mb(2x3y,color=green,bold=True)
-        $ma(2x3y,mod5,color=green)
-        $mb(description,color=blue,text='Take our 2 * x + 3 * y value and mod this value by 5')
+        $modifyBox(2x3y,color=green,bold=True)
+        $modifyArrow(2x3y,mod5,color=green)
+        $modifyBox(description,color=blue,text='2 * x + 3 * y MOD 5')
     Frame End
 
     Frame 10:
-        $mb(mod5,color=red,bold=true,text=@mod(*2x3y;5))
+        $modifyBox(mod5,color=red,bold=true,text=@mod(*2x3y;5))
     Frame End
 
     Frame 11:
-        $rb(mod5)
-        $rb(2x3y)
-        $ra(2x3y,mod5)
-        $rb(description)
+        $resetBox(mod5)
+        $resetBox(2x3y)
+        $resetArrow(2x3y,mod5)
+        $resetBox(description)
     Frame End
 
     Frame 12:
-        $mb(y2,color=blue,bold=true)
-        $ma(y2,rowind,color=blue)
-        $mb(mod5,color=blue,bold=true)
-        $ma(mod5,colind,color=blue)
-        $mb(description,color=blue,text='Update the row index based on our current y value and the column index based on our calculation.')
+        $modifyBox(mod5,color=blue,bold=true)
+        $modifyArrow(mod5,colind,color=blue)
+        $modifyBox(description,color=blue,text='New row index equals y and the new column index equals x')
     Frame End
 
     Frame 13:
-        $mb(rowind,color=blue,bold=true,text=*y2)
-        $mb(colind,color=blue,bold=true,text=*mod5)
+        $modifyBox(rowind,color=blue,bold=true,text=*y)
+        $modifyBox(colind,color=blue,bold=true,text=*mod5)
     Frame End
 
     Frame 14:
-        $rb(rowind)
-        $rb(colind)
-        $ra(y2,rowind)
-        $ra(mod5,colind)
-        $rb(y2)
-        $rb(mod5)
-        $rb(description)
+        $resetBox(rowind)
+        $resetBox(colind)
+        $resetArrow(mod5,colind)
+        $resetBox(mod5)
+        $resetBox(description)
     Frame End
 
     Frame 15:
-        $mb(colind,color=blue,bold=true)
-        $mb(rowind,color=blue,bold=true)
-        $mb(i1by,color=blue,bold=true)
-        $ma(colind,o02,color=blue)
-        $ma(rowind,o02,color=blue)
-        $ma(i1by,o02,color=blue)
-        $mb(description,color=blue,text='Take our row and column indices and place our current input bytes at that corresponding position.')
+        $modifyBox(colind,color=blue,bold=true)
+        $modifyBox(rowind,color=blue,bold=true)
+        $modifyBox(i1by,color=blue,bold=true)
+        $modifyArrow(colind,o02,color=blue)
+        $modifyArrow(rowind,o02,color=blue)
+        $modifyArrow(i1by,o02,color=blue)
+        $modifyBox(description,color=blue,text='Take our row and column indices and place our current input bytes at that corresponding position.')
     Frame End
 
     Frame 16:
-        $mb(@concat(@concat('o';*rowind);*colind),color=blue,bold=true,text=*i1by)
+        $modifyBox(@concat(@concat('o';*rowind);*colind),color=blue,bold=true,text=*i1by)
     Frame End
 
     Frame 17:
-        $rb(colind)
-        $rb(rowind)
-        $rb(i1by)
-        $rb(@concat(@concat('o';*rowind);*colind))
-        $ra(colind,o02)
-        $ra(rowind,o02)
-        $ra(i1by,o02)
-        $rb(description)
+        $resetBox(colind)
+        $resetBox(rowind)
+        $resetBox(i1by)
+        $resetBox(@concat(@concat('o';*rowind);*colind))
+        $resetArrow(colind,o02)
+        $resetArrow(rowind,o02)
+        $resetArrow(i1by,o02)
+        $resetBox(description)
     Frame End
-
 
     _roundNum = @+(_roundNum;1)
     Frame 18:
@@ -178,44 +181,43 @@ while @lt(_roundNum;25):
             _yNum = 0
             _xNum = @+(_xNum;1)
         if end
-        $mb(i1by,text='rho[x][y] bytes')
-        $mb(x,text='X')
-        $mb(y,text='Y')
-        $mb(2x3y,text='2x + 3y')
-        $mb(mod5,text='Mod 5')
-        $mb(colind,text='Column Number')
-        $mb(y2,text='Y')
-        $mb(rowind,text='Row Number')
-        $mb(description,color=blue,text='End of current round of Pi. We now move on to the next block of rho input')
+        $modifyBox(i1by,text='rho[x][y] bytes')
+        $modifyBox(x,text='X')
+        $modifyBox(y,text='Y')
+        $modifyBox(2x3y,text='2x + 3y')
+        $modifyBox(mod5,text='Mod 5')
+        $modifyBox(colind,text='Column \Index')
+        $modifyBox(rowind,text='Row Index')
+        $modifyBox(description,color=blue,text='End of current round of the Pi function')
     Frame End
 While End
 
 Round
 Frame 19:
-    $mb(description,color=blue,text='End of Pi function. The output of Pi is seen in the bottom matrix block')
-    $mb(o00,color=red,bold=True)
-    $mb(o01,color=red,bold=True)
-    $mb(o02,color=red,bold=True)
-    $mb(o03,color=red,bold=True)
-    $mb(o04,color=red,bold=True)
-    $mb(o10,color=red,bold=True)
-    $mb(o11,color=red,bold=True)
-    $mb(o12,color=red,bold=True)
-    $mb(o13,color=red,bold=True)
-    $mb(o14,color=red,bold=True)
-    $mb(o20,color=red,bold=True)
-    $mb(o21,color=red,bold=True)
-    $mb(o22,color=red,bold=True)
-    $mb(o23,color=red,bold=True)
-    $mb(o24,color=red,bold=True)
-    $mb(o30,color=red,bold=True)
-    $mb(o31,color=red,bold=True)
-    $mb(o32,color=red,bold=True)
-    $mb(o33,color=red,bold=True)
-    $mb(o34,color=red,bold=True)
-    $mb(o40,color=red,bold=True)
-    $mb(o41,color=red,bold=True)
-    $mb(o42,color=red,bold=True)
-    $mb(o43,color=red,bold=True)
-    $mb(o44,color=red,bold=True)
+    $modifyBox(description,color=blue,text='End of Pi function. The output of Pi is seen in the bottom matrix block')
+    $modifyBox(o00,color=red,bold=True)
+    $modifyBox(o01,color=red,bold=True)
+    $modifyBox(o02,color=red,bold=True)
+    $modifyBox(o03,color=red,bold=True)
+    $modifyBox(o04,color=red,bold=True)
+    $modifyBox(o10,color=red,bold=True)
+    $modifyBox(o11,color=red,bold=True)
+    $modifyBox(o12,color=red,bold=True)
+    $modifyBox(o13,color=red,bold=True)
+    $modifyBox(o14,color=red,bold=True)
+    $modifyBox(o20,color=red,bold=True)
+    $modifyBox(o21,color=red,bold=True)
+    $modifyBox(o22,color=red,bold=True)
+    $modifyBox(o23,color=red,bold=True)
+    $modifyBox(o24,color=red,bold=True)
+    $modifyBox(o30,color=red,bold=True)
+    $modifyBox(o31,color=red,bold=True)
+    $modifyBox(o32,color=red,bold=True)
+    $modifyBox(o33,color=red,bold=True)
+    $modifyBox(o34,color=red,bold=True)
+    $modifyBox(o40,color=red,bold=True)
+    $modifyBox(o41,color=red,bold=True)
+    $modifyBox(o42,color=red,bold=True)
+    $modifyBox(o43,color=red,bold=True)
+    $modifyBox(o44,color=red,bold=True)
 Frame End
