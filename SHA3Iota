@@ -2,18 +2,20 @@
 # input: chi, rc
 Frame 1:
     $modifyTitle(text='Iota Function Visualization', color='red')
-    $db(chiby,55,720,1020,90,text='Chi bytes')
-    $db(description,930,550,240,140,text='Description of events')
+    $drawBox(chiby,         45, 850, 1055,  90, text='Chi bytes')
+    $drawBox(description, 1120, 800,  340, 140, text='Description of events')
 
-    $db(rchiby,500,280,400,180,text='Rest of Chi bytes')
-    $drawBox(i1by,55,620,200,50,text='Chi[0][0] bytes')
-    $drawBox(i1bi,55,500,200,70,text='Chi[0][0] bits')
-    $drawBox(i2by,370,620,200,50,text='Round constant bytes')
-    $drawBox(i2bi,370,500,200,70,text='Round constant bits')
-    $drawBox(xor,290,510,50,50,text='XOR')
-    $drawBox(obi,200,410,230,70,text='XOR output bit')
-    $drawBox(oby,215,310,200,50,text='XOR output byte')
-    $drawBox(oba,80,80,1020,90,text='Iota output')
+    $drawBox(i2by,   370, 720,  200,  50, text='Round constant bytes')
+    $drawBox(i1by,    55, 720,  200,  50, text='Chi[0][0] bytes')
+
+    $drawBox(i1bi,    75, 600,  160,  70, text='Chi[0][0] bits')
+    $drawBox(xor,    290, 610,   50,  50, text='XOR')
+    $drawBox(i2bi,   390, 600,  160,  70, text='Round constant bits')
+    $drawBox(rchiby, 650, 590,  420, 180, text='Rest of Chi bytes')
+
+    $drawBox(obi,    235, 510,  160,  70, text='XOR output bit')
+    $drawBox(oby,    215, 410,  200,  50, text='XOR output byte')
+    $drawBox(oba,     80, 180, 1055,  90, text='Iota output')
 
     $drawArrow(chiby,i1by)
     $drawArrow(i1by,i1bi)
@@ -22,125 +24,125 @@ Frame 1:
     $drawArrow(i1bi,xor)
     $drawArrow(xor,obi)
     $drawArrow(obi,oby)
-    $da(chiby,rchiby)
-    $da(oby,oba)
-    $da(rchiby,oba)
+    $drawArrow(chiby,rchiby)
+    $drawArrow(oby,oba)
+    $drawArrow(rchiby,oba)
 Frame End
 
 Frame 2:
     $modifyTitle(color='black')
-    $mb(chiby,color=blue,bold=True,text=*chi)
-    $mb(i2by,color=blue,bold=True,text=*rc)
-    $mb(description,color=blue,text='Populate the input block with the output of the previous Chi function. This input is a matrix of 25 values set up in a 5x5 matrix.')
+    $modifyBox(chiby,color=blue,bold=True,text=*chi)
+    $modifyBox(i2by,color=blue,bold=True,text=*rc)
+    $modifyBox(description,color=blue,text='Populate the input block with the output of the previous Chi function. \\This input is a matrix of 25 values set up in a 5x5 matrix.')
 Frame End
 
 Frame 3:
-    $rb(chiby)
-    $rb(i2by)
-    $rb(description)
+    $resetBox(chiby)
+    $resetBox(i2by)
+    $resetBox(description)
 Frame End
 
 Frame 4:
-    $mb(chiby,color=blue,bold=true)
-    $ma(chiby,i1by,color=blue)
-    $mb(i1by,color=blue,bold=true,text=@indexmat(*chi;0;0))
-    $ma(chiby,rchiby,color=blue)
-    $mb(rchiby,color=blue,bold=true,text=@last384(*chiby))
-    $mb(description,color=blue,text='Populate the Chi[0][0] block with the corresponding part of the input Chi block and put the rest of the Chi bytes in the Chi bytes box. Also update the round constant box to the curretn round constant')
+    $modifyBox(chiby,color=blue,bold=true)
+    $modifyArrow(chiby,i1by,color=blue)
+    $modifyBox(i1by,color=blue,bold=true,text=@indexmat(*chi;0;0))
+    $modifyArrow(chiby,rchiby,color=blue)
+    $modifyBox(rchiby,color=blue,bold=true,text=@groupAsI64(@last384(*chiby)))
+    $modifyBox(description,color=blue,text='Populate the Chi[0][0] block with the corresponding part of the input Chi block and put the rest of the Chi bytes in the Chi bytes box. Also update the round constant box to the curretn round constant')
 Frame End
 
 Frame 5:
-    $rb(chiby)
-    $rb(i1by)
-    $ra(chiby,i1by)
-    $rb(rchiby)
-    $ra(chiby,rchiby)
-    $rb(description)
+    $resetBox(chiby)
+    $resetBox(i1by)
+    $resetArrow(chiby,i1by)
+    $resetBox(rchiby)
+    $resetArrow(chiby,rchiby)
+    $resetBox(description)
 Frame End
 
 Frame 6:
     $modifyTitle(color='black')
-    $mb(i1by, color='blue',bold=True,text=@indexmat(*chi;0;0))
-    $mb(i2by, color='blue',bold=True,text=*rc)
-    $ma(i1by,i1bi,color='blue')
-    $ma(i2by,i2bi,color='blue')
-    $mb(description,color=blue,text='Translate the round constant and the Chi[0][0] bytes to bits in preparation for the XOR operation.')
+    $modifyBox(i1by, color='blue',bold=True,text=@indexmat(*chi;0;0))
+    $modifyBox(i2by, color='blue',bold=True,text=*rc)
+    $modifyArrow(i1by,i1bi,color='blue')
+    $modifyArrow(i2by,i2bi,color='blue')
+    $modifyBox(description,color=blue,text='Translate the round constant and the Chi[0][0] bytes to bits in preparation for the XOR operation.')
 Frame End
 
 Frame 7:
-    $mb(i1bi, color='blue',bold=True,text=@bytebit(*i1by))
-    $mb(i2bi, color='blue',bold=True,text=@bytebit(*i2by))
+    $modifyBox(i1bi, color='blue',bold=True,text=@bytebit(*i1by))
+    $modifyBox(i2bi, color='blue',bold=True,text=@bytebit(*i2by))
 Frame End
 
 Frame 8:
-    $rb(i1by)
-    $rb(i2by)
-    $ra(i1by,i1bi)
-    $ra(i2by,i2bi)
-    $rb(description)
+    $resetBox(i1by)
+    $resetBox(i2by)
+    $resetArrow(i1by,i1bi)
+    $resetArrow(i2by,i2bi)
+    $resetBox(description)
 Frame End
 
 Frame 9:
-    $mb(i1bi,color='green')
-    $mb(i2bi,color='green')
-    $ma(i1bi,xor,color='green')
-    $ma(i2bi,xor,color='green')
-    $mb(description,color=blue,text='Take the round constant and Chi[0][0] bits as input and XOR them together. This will become the new Iota[0][0] value.')
+    $modifyBox(i1bi,color='green')
+    $modifyBox(i2bi,color='green')
+    $modifyArrow(i1bi,xor,color='green')
+    $modifyArrow(i2bi,xor,color='green')
+    $modifyBox(description,color=blue,text='Take the round constant and Chi[0][0] bits as input and XOR them together. This will become the new Iota[0][0] value.')
 Frame End
 
 Frame 10:
-    $mb(xor, color='red',bold=True)
-    $ma(xor,obi,color='red')
+    $modifyBox(xor, color='red',bold=True)
+    $modifyArrow(xor,obi,color='red')
 Frame End
 
 Frame 11:
-    $mb(obi, color='red',bold=True, text=@xor(*i1bi;*i2bi))
+    $modifyBox(obi, color='red',bold=True, text=@xor(*i1bi;*i2bi))
 Frame End
 
 Frame 12:
-    $rb(obi)
-    $rb(i1bi)
-    $rb(i2bi)
-    $ra(i1bi,xor)
-    $ra(i2bi,xor)
-    $rb(xor)
-    $ra(xor,obi)
-    $rb(description)
+    $resetBox(obi)
+    $resetBox(i1bi)
+    $resetBox(i2bi)
+    $resetArrow(i1bi,xor)
+    $resetArrow(i2bi,xor)
+    $resetBox(xor)
+    $resetArrow(xor,obi)
+    $resetBox(description)
 Frame End
 
 Frame 13:
-    $mb(obi,color='blue',bold=true)
-    $ma(obi,oby,color='blue')
-    $mb(description,color=blue,text='Translate the XOR output back to bytes to place into Iota output.')
+    $modifyBox(obi,color='blue',bold=true)
+    $modifyArrow(obi,oby,color='blue')
+    $modifyBox(description,color=blue,text='Translate the XOR output back to bytes to place into Iota output.')
 Frame End
 
 Frame 14:
-    $mb(oby,color='blue',bold=True,text=@bitbyte(*obi))
+    $modifyBox(oby,color='blue',bold=True,text=@bitbyte(*obi))
 Frame End
 
 Frame 15:
-    $rb(obi)
-    $ra(obi,oby)
-    $rb(oby)
-    $rb(description)
+    $resetBox(obi)
+    $resetArrow(obi,oby)
+    $resetBox(oby)
+    $resetBox(description)
 Frame End
 
 Frame 16:
-    $mb(oby,color=blue,bold=True)
-    $mb(rchiby,color=blue,bold=true)
-    $ma(oby,oba,color=blue)
-    $ma(rchiby,oba,color=blue)
-    $mb(description,color=red,text='We replace the first value of the matrix with our new value and add the rest of the matrix back to get the output of the Iota function. This is shown in the lower block.')
+    $modifyBox(oby,color=blue,bold=True)
+    $modifyBox(rchiby,color=blue,bold=true)
+    $modifyArrow(oby,oba,color=blue)
+    $modifyArrow(rchiby,oba,color=blue)
+    $modifyBox(description,color=red,text='We replace the first value of the matrix with our new value and add the rest of the matrix back to get the output of the Iota function. This is shown in the lower block.')
 Frame End
 
 Frame 17:
-    $mb(oba,color=blue,bold=true,text=@concat(@concat(*oby;' ');*rchiby))
+    $modifyBox(oba,color=blue,bold=true,text=@concat(@concat(*oby;'  ');*rchiby))
 Frame End
 
 Frame 18:
-    $rb(oby)
-    $rb(rchiby)
-    $ra(oby,oba)
-    $ra(rchiby,oba)
-    $mb(oba,color=red)
+    $resetBox(oby)
+    $resetBox(rchiby)
+    $resetArrow(oby,oba)
+    $resetArrow(rchiby,oba)
+    $modifyBox(oba,color=red)
 Frame End
