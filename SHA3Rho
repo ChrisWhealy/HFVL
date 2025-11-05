@@ -5,202 +5,205 @@ _xNum = 0
 _yNum = 0
 Frame 1:
     $modifyTitle(text='Rho Function Visualization Round 0', color='red')
-    $db(b,55,720,860,90,text='Theta bytes')
-    $drawBox(i1by,105,620,200,50,text='Theta[x][y] bytes')
-    $drawBox(i1bi,90,550,230,50,text='Theta[x][y] bits')
-    $drawBox(rot,420,550,200,50,text='Rotation Amount')
-    $drawBox(bs,420,460,200,50,text='Right bit shift')
-    $drawBox(obi,405,360,230,50,text='Theta[x][y] bit shifted bits')
-    $drawBox(oby,420,280,200,50,text='Theta[x][y] bit shifted bytes')
-    $drawBox(obr,90,50,860,90,text='Rho output')
-    $db(rotschedule,930,550,240,100,text='Current Rotation\Round  0:  0\Round  1: 36\Round  2:  3\Round  3: 41\Round  4: 18')
-    $db(description,930,670,240,140,text='Description of events')
+    $drawBox(b,             55, 850, 1055,  90, text='Theta bytes')
+    $drawBox(description, 1120, 800,  340, 140, text='Description of events')
+
+    $drawBox(i1by,         480, 750, 200,  50, text='Theta[x][y] bytes')
+    $drawBox(i1bi,         500, 650, 160,  75, text='Theta[x][y] bits')
+    $drawBox(rotschedule, 1120, 535, 240,  100, text='Current Rotation\Round  0:  0\Round  1: 36\Round  2:  3\Round  3: 41\Round  4: 18')
+
+    $drawBox(rot,          760, 560, 200,  50, text='Rotation Amount')
+    $drawBox(bs,           480, 560, 200,  50, text='Right bit shift')
+
+    $drawBox(obi,          500, 440,  160,  75, text='Shited Theta[x][y] bits')
+    $drawBox(oby,          480, 350,  200,  50, text='Shifted Theta[x][y bytes')
+    $drawBox(obr,           55, 150, 1055,  90, text='Rho output')
 
     $drawArrow(b,i1by)
     $drawArrow(i1by,i1bi)
     $drawArrow(i1bi,bs)
-    $da(rot,bs)
+    $drawArrow(rot,bs)
     $drawArrow(bs,obi)
     $drawArrow(obi,oby)
-    $da(oby,obr)
+    $drawArrow(oby,obr)
 Frame End
 
 Frame 2:
-    $mb(b,color=blue,bold=true,text=*theta)
+    $modifyBox(b,color=blue,bold=true,text=*theta)
 Frame End
 
 Frame 3:
-    $rb(b)
+    $resetBox(b)
 Frame End
 
 while @lt(_roundNum;25):
     Round
     Frame 4:
-        $mb(b,color=blue,bold=true)
-        $ma(b,i1by,color=blue)
+        $modifyBox(b,color=blue,bold=true)
+        $modifyArrow(b,i1by,color=blue)
         if @lt(_roundNum;5):
-            $mb(rotschedule,color=blue,text='Current Rotation\Round  0:  0\Round  1: 36\Round  2:  3\Round  3: 41\Round  4: 18')
+            $modifyBox(rotschedule,color=blue,text='Current Rotation\Round  0:  0\Round  1: 36\Round  2:  3\Round  3: 41\Round  4: 18')
         elif @lt(_roundNum;10):
-            $mb(rotschedule,color=blue,text='Current Rotation\Round  5:  1\Round  6: 10\Round  7: 44\Round  8: 45\Round  9:  2')
+            $modifyBox(rotschedule,color=blue,text='Current Rotation\Round  5:  1\Round  6: 10\Round  7: 44\Round  8: 45\Round  9:  2')
         elif @lt(_roundNum;15):
-            $mb(rotschedule,color=blue,text='Current Rotation\Round 10: 62\Round 11:  6\Round 12: 43\Round 13: 15\Round 14: 61')
+            $modifyBox(rotschedule,color=blue,text='Current Rotation\Round 10: 62\Round 11:  6\Round 12: 43\Round 13: 15\Round 14: 61')
         elif @lt(_roundNum;20):
-            $mb(rotschedule,color=blue,text='Current Rotation\Round 15: 28\Round 16: 55\Round 17: 25\Round 18: 21\Round 19: 56')
+            $modifyBox(rotschedule,color=blue,text='Current Rotation\Round 15: 28\Round 16: 55\Round 17: 25\Round 18: 21\Round 19: 56')
         else:
-            $mb(rotschedule,color=blue,text='Current Rotation\Round 20: 27\Round 21: 20\Round 22: 39\Round 23:  8\Round 24: 14')
+            $modifyBox(rotschedule,color=blue,text='Current Rotation\Round 20: 27\Round 21: 20\Round 22: 39\Round 23:  8\Round 24: 14')
         if end
-        $mb(description,color=blue,text='Update the current rotation number schedule and take the current bytes to be rotated from the input block')
+        $modifyBox(description,color=blue,text='Update the current rotation number schedule and take the current bytes to be rotated from the input block')
     Frame End
 
     Frame 5:
-        $rb(rotschedule)
-        $mb(i1by,color=blue,bold=true,text=@indexmat(*theta;_xNum;_yNum))
+        $resetBox(rotschedule)
+        $modifyBox(i1by,color=blue,bold=true,text=@indexmat(*theta;_xNum;_yNum))
     Frame End
 
     Frame 6:
-        $rb(b)
-        $ra(b,i1by)
-        $rb(description)
+        $resetBox(b)
+        $resetArrow(b,i1by)
+        $resetBox(description)
     Frame End
 
     Frame 6:
-        $ma(i1by,i1bi,color='blue')
-        $mb(i1bi,color=blue,bold=true)
-        $mb(description,color=blue,text='Translate the current bytes to bits')
+        $modifyArrow(i1by,i1bi,color='blue')
+        $modifyBox(i1bi,color=blue,bold=true)
+        $modifyBox(description,color=blue,text='Translate the current bytes to bits')
     Frame End
 
     Frame 7:
-        $mb(i1bi,text=@bytebit(*i1by))
+        $modifyBox(i1bi,text=@bytebit(*i1by))
     Frame End
 
     Frame 8:
-        $rb(i1bi)
-        $rb(i1by)
-        $ra(i1by,i1bi)
-        $rb(description)
+        $resetBox(i1bi)
+        $resetBox(i1by)
+        $resetArrow(i1by,i1bi)
+        $resetBox(description)
     Frame End
 
     Frame 9:
-        $mb(description,color=blue,text='Populate the rotation number from our schedule')
-        $mb(rotschedule,color=blue,bold=true)
+        $modifyBox(description,color=blue,text='Populate the rotation number from our schedule')
+        $modifyBox(rotschedule,color=blue,bold=true)
         if @lt(_roundNum;1):
-            $mb(rot,color=blue,bold=true,text='0')
+            $modifyBox(rot,color=blue,bold=true,text='0')
         elif @lt(_roundNum;2):
-            $mb(rot,color=blue,bold=true,text='36')
+            $modifyBox(rot,color=blue,bold=true,text='36')
         elif @lt(_roundNum;3):
-            $mb(rot,color=blue,bold=true,text='3')
+            $modifyBox(rot,color=blue,bold=true,text='3')
         elif @lt(_roundNum;4):
-            $mb(rot,color=blue,bold=true,text='41')
+            $modifyBox(rot,color=blue,bold=true,text='41')
         elif @lt(_roundNum;5):
-            $mb(rot,color=blue,bold=true,text='18')
+            $modifyBox(rot,color=blue,bold=true,text='18')
         elif @lt(_roundNum;6):
-            $mb(rot,color=blue,bold=true,text='1')
+            $modifyBox(rot,color=blue,bold=true,text='1')
         elif @lt(_roundNum;7):
-            $mb(rot,color=blue,bold=true,text='10')
+            $modifyBox(rot,color=blue,bold=true,text='10')
         elif @lt(_roundNum;8):
-            $mb(rot,color=blue,bold=true,text='44')
+            $modifyBox(rot,color=blue,bold=true,text='44')
         elif @lt(_roundNum;9):
-            $mb(rot,color=blue,bold=true,text='45')
+            $modifyBox(rot,color=blue,bold=true,text='45')
         elif @lt(_roundNum;10):
-            $mb(rot,color=blue,bold=true,text='2')
+            $modifyBox(rot,color=blue,bold=true,text='2')
         elif @lt(_roundNum;11):
-            $mb(rot,color=blue,bold=true,text='62')
+            $modifyBox(rot,color=blue,bold=true,text='62')
         elif @lt(_roundNum;12):
-            $mb(rot,color=blue,bold=true,text='6')
+            $modifyBox(rot,color=blue,bold=true,text='6')
         elif @lt(_roundNum;13):
-            $mb(rot,color=blue,bold=true,text='43')
+            $modifyBox(rot,color=blue,bold=true,text='43')
         elif @lt(_roundNum;14):
-            $mb(rot,color=blue,bold=true,text='15')
+            $modifyBox(rot,color=blue,bold=true,text='15')
         elif @lt(_roundNum;15):
-            $mb(rot,color=blue,bold=true,text='61')
+            $modifyBox(rot,color=blue,bold=true,text='61')
         elif @lt(_roundNum;16):
-            $mb(rot,color=blue,bold=true,text='28')
+            $modifyBox(rot,color=blue,bold=true,text='28')
         elif @lt(_roundNum;17):
-            $mb(rot,color=blue,bold=true,text='55')
+            $modifyBox(rot,color=blue,bold=true,text='55')
         elif @lt(_roundNum;18):
-            $mb(rot,color=blue,bold=true,text='25')
+            $modifyBox(rot,color=blue,bold=true,text='25')
         elif @lt(_roundNum;19):
-            $mb(rot,color=blue,bold=true,text='21')
+            $modifyBox(rot,color=blue,bold=true,text='21')
         elif @lt(_roundNum;20):
-            $mb(rot,color=blue,bold=true,text='56')
+            $modifyBox(rot,color=blue,bold=true,text='56')
         elif @lt(_roundNum;21):
-            $mb(rot,color=blue,bold=true,text='27')
+            $modifyBox(rot,color=blue,bold=true,text='27')
         elif @lt(_roundNum;22):
-            $mb(rot,color=blue,bold=true,text='20')
+            $modifyBox(rot,color=blue,bold=true,text='20')
         elif @lt(_roundNum;23):
-            $mb(rot,color=blue,bold=true,text='39')
+            $modifyBox(rot,color=blue,bold=true,text='39')
         elif @lt(_roundNum;24):
-            $mb(rot,color=blue,bold=true,text='8')
+            $modifyBox(rot,color=blue,bold=true,text='8')
         else:
-            $mb(rot,color=blue,bold=true,text='14')
+            $modifyBox(rot,color=blue,bold=true,text='14')
         if end
     Frame End
 
     Frame 10:
-        $rb(rot)
-        $rb(description)
-        $rb(rotschedule)
+        $resetBox(rot)
+        $resetBox(description)
+        $resetBox(rotschedule)
     Frame End
 
     Frame 17:
-        $mb(description,color=blue,text='Right rotate the input bits by the current rotation number')
-        $mb(rot,color=green,bold=true)
-        $mb(i1bi,color=green,bold=true)
-        $ma(i1bi,bs,color=green)
-        $ma(rot,bs,color=green)
+        $modifyBox(description,color=blue,text='Right rotate the input bits by the current rotation number')
+        $modifyBox(rot,color=green,bold=true)
+        $modifyBox(i1bi,color=green,bold=true)
+        $modifyArrow(i1bi,bs,color=green)
+        $modifyArrow(rot,bs,color=green)
     Frame End
 
     Frame 18:
-        $mb(bs,color=red,bold=true)
-        $ma(bs,obi,color=red)
+        $modifyBox(bs,color=red,bold=true)
+        $modifyArrow(bs,obi,color=red)
     Frame End
 
     Frame 19:
-        $mb(obi,color=red,bold=True,text=@rbitshift(*i1bi;*rot))
+        $modifyBox(obi,color=red,bold=True,text=@rbitshift(*i1bi;*rot))
     Frame End
 
     Frame 20:
-        $rb(rot)
-        $ra(rot,bs)
-        $rb(obi)
-        $rb(bs)
-        $rb(i1bi)
-        $ra(i1bi,bs)
-        $ra(bs,obi)
-        $rb(description)
+        $resetBox(rot)
+        $resetArrow(rot,bs)
+        $resetBox(obi)
+        $resetBox(bs)
+        $resetBox(i1bi)
+        $resetArrow(i1bi,bs)
+        $resetArrow(bs,obi)
+        $resetBox(description)
     Frame End
 
     Frame 21:
-        $mb(description,color=blue,text='Translate the output bits back into bytes')
-        $mb(obi,color=blue,bold=true)
-        $ma(obi,oby,color=blue)
+        $modifyBox(description,color=blue,text='Translate the output bits back into bytes')
+        $modifyBox(obi,color=blue,bold=true)
+        $modifyArrow(obi,oby,color=blue)
     Frame End
 
     Frame 22:
-        $mb(oby,color=blue,bold=true,text=@bitbyte(*obi))
+        $modifyBox(oby,color=blue,bold=true,text=@bitbyte(*obi))
     Frame End
 
     Frame 23:
-        $rb(obi)
-        $ra(obi,oby)
-        $rb(description)
+        $resetBox(obi)
+        $resetArrow(obi,oby)
+        $resetBox(description)
     Frame End
 
     Frame 24:
-        $mb(description,color=blue,text='Append the current bytes to the overall rho output block')
-        $ma(oby,obr,color=blue)
+        $modifyBox(description,color=blue,text='Append the current bytes to the overall rho output block')
+        $modifyArrow(oby,obr,color=blue)
         if @lt(_roundNum;1):
-            $mb(obr,color=blue,bold=true,text=*oby)
+            $modifyBox(obr,color=blue,bold=true,text=*oby)
         else:
-            $mb(obr,color=blue,bold=true,text=@concat(@concat(*obr;' ');*oby))
+            $modifyBox(obr,color=blue,bold=true,text=@concat(@concat(*obr;'  ');*oby))
         if end
     Frame End
 
     Frame 25:
-        $rb(obr)
-        $rb(oby)
-        $ra(oby,obr)
-        $rb(description)
+        $resetBox(obr)
+        $resetBox(oby)
+        $resetArrow(oby,obr)
+        $resetBox(description)
     Frame End
 
     _roundNum = @+(_roundNum;1)
@@ -212,19 +215,19 @@ while @lt(_roundNum;25):
             _yNum = 0
             _xNum = @+(_xNum;1)
         if end
-        $mb(description,color=blue,text='End of current round. We will now take the next chunk from the input block')
+        $modifyBox(description,color=blue,text='End of current round. We will now take the next chunk from the input block')
         $modifyTitle(text=@concat('Rho Function Visualization Round ';_roundNum), color='red')
-        $mb(i1by,text='Theta[x][y] bytes')
-        $mb(i1bi,text='Theta[x][y] bits')
-        $mb(obi,text='Theta[x][y] bit shifted bits')
-        $mb(oby,text='Theta[x][y] bit shifted bytes')
-        $mb(rot,text='Rotation Amount')
-        $mb(bs,text='Right bit shift')
+        $modifyBox(i1by,text='Theta[x][y] bytes')
+        $modifyBox(i1bi,text='Theta[x][y] bits')
+        $modifyBox(obi,text='Shifted Theta[x][y] bits')
+        $modifyBox(oby,text='Shifted Theta[x][y] bytes')
+        $modifyBox(rot,text='Rotation Amount')
+        $modifyBox(bs,text='Right bit shift')
     Frame End
 While End
 
 Round
 Frame 27:
-    $mb(description,color=blue,text='End of Rho function, output of rho is seen in the bottom block')
-    $mb(obr,color=red,bold=True)
+    $modifyBox(description,color=blue,text='End of Rho function, output of rho is seen in the bottom block')
+    $modifyBox(obr,color=red,bold=True)
 Frame End
